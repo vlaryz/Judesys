@@ -7,20 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.text.SimpleDateFormat;
-import java.util.Set;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CityResponse {
+public class EventResponse {
     private String name;
+    private boolean isFree;
 
-    public CityResponse(City city) {
-        this.name = city.getName();
+    public EventResponse(Event event) {
+        this.name = event.getName();
+        this.isFree = event.isFree();
     }
-    public static CityResponse fromCity (City city){
-        return new CityResponse(city);
+    public static EventResponse fromEvent (Event event){
+        return new EventResponse(event.getName(), event.isFree());
     }
 }

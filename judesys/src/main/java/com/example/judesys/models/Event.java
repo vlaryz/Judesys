@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -21,7 +22,15 @@ public class Event {
     @OneToMany(mappedBy="event")
     private List<Ticket> tickets;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "fk_cityId", nullable = false)
     private City city;
+
+    public Event(String name, boolean isFree) {
+        this.name = name;
+        this.isFree = isFree;
+    }
+    public Event() {
+
+    }
 }

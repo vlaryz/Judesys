@@ -34,11 +34,13 @@ public class CityService implements ICityService {
 
     @Override
     public List<CityResponse> getAllCities() {
-        return null;
+        return repository.findAll().stream().map(CityResponse::new).toList();
     }
 
     @Override
     public CityResponse geCityById(long id) {
+//        System.out.println(repository.findById(id).orElseThrow(() ->
+//                new ResourceNotFoundException("City", "Id", id)));
         return new CityResponse(repository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("City", "Id", id)));
     }

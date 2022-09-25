@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -30,6 +31,12 @@ public class CityController {
     @GetMapping(value = "{id}")
     public ResponseEntity<CityResponse> getCity(@PathVariable("id") long id) {
         return new ResponseEntity<>(service.geCityById(id), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/")
+    public ResponseEntity<List<CityResponse>> getAllCities() {
+        return new ResponseEntity<>(service.getAllCities(), HttpStatus.OK);
     }
 
     @CrossOrigin

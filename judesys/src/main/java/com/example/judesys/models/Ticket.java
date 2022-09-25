@@ -2,12 +2,14 @@ package com.example.judesys.models;
 
 import com.example.judesys.models.enums.TicketType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "tickets")
+@NoArgsConstructor
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +21,12 @@ public class Ticket {
     @Column(name = "type", nullable = false)
     private TicketType type;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "fk_eventId", nullable = false)
     private Event event;
+
+    public Ticket(long price, TicketType type) {
+        this.price = price;
+        this.type = type;
+    }
 }
