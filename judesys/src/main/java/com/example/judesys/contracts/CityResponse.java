@@ -15,9 +15,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CityResponse {
+    private long id;
     private String name;
 
     public CityResponse(City city) {
+        this.id = city.getId();
         this.name = city.getName();
     }
     public static CityResponse fromCity (City city){

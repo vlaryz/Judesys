@@ -1,7 +1,5 @@
 package com.example.judesys.interfaces;
 
-import com.example.judesys.contracts.CityRequest;
-import com.example.judesys.contracts.CityResponse;
 import com.example.judesys.contracts.EventRequest;
 import com.example.judesys.contracts.EventResponse;
 
@@ -11,11 +9,11 @@ public interface IEventService {
 
     EventResponse saveEvent(EventRequest eventRequest, long cityId);
 
-    List<EventResponse> getAllEvents();
+    List<EventResponse> getAllEvents(long cityId);
 
-    EventResponse getEventById(long id);
+    EventResponse getEventById(long id, long cityId);
 
-    EventResponse updateEvent(EventRequest eventRequest, long id);
+    EventResponse updateEvent(EventRequest eventRequest, long id, long cityId);
 
-    void deleteEvent(long id);
+    long deleteEvent(long id, long cityId);
 }

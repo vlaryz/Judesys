@@ -1,6 +1,6 @@
 package com.example.judesys.models.enums;
 
-public enum UserType {
+public enum UserRole {
     UNREGISTERED,
     REGISTERED,
     ADMIN

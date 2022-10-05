@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ITicketService {
 
-    TicketResponse saveTicket(TicketRequest ticketRequest, long eventId);
+    TicketResponse saveTicket(long cityId, long eventId, TicketRequest ticketRequest);
 
-    List<TicketResponse> getAllTickets();
+    List<TicketResponse> getAllTickets(long cityId, long eventId);
 
-    TicketResponse getTicketById(long id);
+    TicketResponse getTicketById(long cityId, long eventId, long id);
 
-    TicketResponse updateTicket(TicketRequest ticketRequest, long id);
+    TicketResponse updateTicket(long cityId, long eventId, long id, TicketRequest ticketRequest);
 
-    void deleteTicket(long id);
+    void deleteTicket(long cityId, long eventId, long id);
 }

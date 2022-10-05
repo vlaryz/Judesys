@@ -12,14 +12,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventResponse {
+    private long id;
     private String name;
     private boolean isFree;
 
     public EventResponse(Event event) {
+        this.id = event.getId();
         this.name = event.getName();
         this.isFree = event.isFree();
     }
     public static EventResponse fromEvent (Event event){
-        return new EventResponse(event.getName(), event.isFree());
+        return new EventResponse(event.getId(), event.getName(), event.isFree());
     }
 }

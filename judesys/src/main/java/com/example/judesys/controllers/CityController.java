@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/city")
+@RequestMapping("/api/cities")
 @Validated
 @AllArgsConstructor
 public class CityController {
@@ -22,13 +22,13 @@ public class CityController {
     public final CityService service;
 
     @CrossOrigin
-    @PostMapping(value = "/addCity", produces = "application/json")
+    @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<CityResponse> addCity(@RequestBody @Valid CityRequest city) {
         return new ResponseEntity<>(service.saveCity(city), HttpStatus.CREATED);
     }
 
     @CrossOrigin
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<CityResponse> getCity(@PathVariable("id") long id) {
         return new ResponseEntity<>(service.geCityById(id), HttpStatus.OK);
     }
@@ -40,13 +40,13 @@ public class CityController {
     }
 
     @CrossOrigin
-    @PutMapping(value = "/updateCity/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<CityResponse> updateCity(@PathVariable("id") long id, @RequestBody @Valid CityRequest city) {
         return new ResponseEntity<>(service.updateCity(city, id), HttpStatus.OK);
     }
 
     @CrossOrigin
-    @DeleteMapping(value = "/deleteCity/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteCity(@PathVariable("id") long id) {
         service.deleteCity(id);
         return new ResponseEntity<>("City Deleted Successfully", HttpStatus.OK);

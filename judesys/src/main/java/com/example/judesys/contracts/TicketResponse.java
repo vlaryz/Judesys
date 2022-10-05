@@ -13,14 +13,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TicketResponse {
+    private long id;
     private long price;
     private TicketType type;
 
     public TicketResponse(Ticket ticket) {
+        this.id = ticket.getId();
         this.price = ticket.getPrice();
         this.type = ticket.getType();
     }
     public static TicketResponse fromTicket (Ticket ticket){
-        return new TicketResponse(ticket.getPrice(), ticket.getType());
+        return new TicketResponse(ticket.getId(), ticket.getPrice(), ticket.getType());
     }
 }
