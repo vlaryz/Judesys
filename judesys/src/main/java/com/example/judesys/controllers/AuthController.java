@@ -1,117 +1,40 @@
 package com.example.judesys.controllers;
 
-import com.example.judesys.contracts.AuthenticationRequest;
-import com.example.judesys.contracts.AuthenticationResponse;
-import com.example.judesys.interfaces.IUserRepository;
-import com.example.judesys.models.User;
-import com.example.judesys.models.enums.UserRole;
-import com.example.judesys.security.JwtUtils;
-import com.example.judesys.services.UserDetailsImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.judesys.contracts.RoleRequest;
+import com.example.judesys.contracts.RegisterUserRequest;
+import com.example.judesys.contracts.UserRoleRequest;
+import com.example.judesys.interfaces.IUserService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/users")
+@AllArgsConstructor
+@Validated
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManager;
+    private final IUserService userService;
 
-    @Autowired
-    IUserRepository userRepository;
-
-    @Autowired
-    PasswordEncoder encoder;
-
-    @Autowired
-    JwtUtils jwtUtils;
-
-    @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthenticationRequest loginRequest) {
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-//        List<String> roles = userDetails.getAuthorities().stream()
-//                .map(item -> item.getAuthority())
-//                .collect(Collectors.toList());
-        return ResponseEntity.ok(new AuthenticationResponse(
-                jwt,
-                userDetails.getEmail()
-        ));
+    @GetMapping("/")
+    public ResponseEntity<?> getUsers() {
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody AuthenticationRequest signUpRequest) {
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Error: Username is already taken!");
-        }
+    @PostMapping("/")
+    public ResponseEntity<?> registerUser(@RequestBody RegisterUserRequest registerUserRequest) {
+        return new ResponseEntity<>(userService.saveUser(registerUserRequest), HttpStatus.CREATED);
+    }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Error: Email is already in use!");
-        }
+    @PostMapping("/roles/")
+    public ResponseEntity<?> saveRole(@RequestBody RoleRequest roleRequest) {
+        return new ResponseEntity<>(userService.saveRole(roleRequest), HttpStatus.CREATED);
+    }
 
-        // Create new user's account
-        User user = new User(signUpRequest.getName(),
-                signUpRequest.getSurname(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
-
-//        Set<String> strRoles = signUpRequest.getRole();
-//        Set<Role> roles = new HashSet<>();
-//
-//        if (strRoles == null) {
-//            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-//                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//            roles.add(userRole);
-//        } else {
-//            strRoles.forEach(role -> {
-//                switch (role) {
-//                    case "admin":
-//                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//                        roles.add(adminRole);
-//
-//                        break;
-//                    case "mod":
-//                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//                        roles.add(modRole);
-//
-//                        break;
-//                    default:
-//                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//                        roles.add(userRole);
-//                }
-//            });
-//        }
-
-//        user.setRoles(roles);
-        user.setRole(UserRole.ADMIN);
-        userRepository.save(user);
-
-        return ResponseEntity.ok("User registered successfully!");
+    @PutMapping("/roles/")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void addRoleToUser(@RequestBody UserRoleRequest userRoleRequest) {
+        userService.addRoleToUser(userRoleRequest);
     }
 }

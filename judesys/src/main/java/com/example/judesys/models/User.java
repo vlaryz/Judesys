@@ -7,7 +7,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import static com.example.judesys.models.enums.UserRole.UNREGISTERED;
+import static javax.persistence.FetchType.EAGER;
 
 @Data
 @Entity
@@ -18,6 +22,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -31,15 +38,19 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-//    @Enumerated(EnumType.STRING)
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "role", length = 20, nullable = false)
-    private UserRole role;
+    @ManyToMany(fetch = EAGER, cascade = CascadeType.ALL)
+    private Collection<Role> roles = new ArrayList<>();
 
-    public User(String name, String surname, String email, String password) {
+    public User(String username, String name, String surname, String email, String password) {
+        this.username = username;
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.password = password;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 }

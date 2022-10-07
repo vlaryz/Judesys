@@ -50,6 +50,5 @@ public class CityController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteCity(@PathVariable("id") long id) {
         service.deleteCity(id);
-//        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 }
