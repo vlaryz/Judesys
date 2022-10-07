@@ -46,8 +46,9 @@ public class EventController {
 
     @CrossOrigin
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Long> deleteEvent(@PathVariable (value = "cityId") Long cityId, @PathVariable("id") long id) {
-        ;
-        return new ResponseEntity<>(service.deleteEvent(id, cityId), HttpStatus.OK);
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteEvent(@PathVariable (value = "cityId") Long cityId, @PathVariable("id") long id) {
+        service.deleteEvent(id, cityId);
+//        return new ResponseEntity<>(, HttpStatus.OK);
     }
 }

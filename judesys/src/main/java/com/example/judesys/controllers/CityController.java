@@ -47,8 +47,9 @@ public class CityController {
 
     @CrossOrigin
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteCity(@PathVariable("id") long id) {
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteCity(@PathVariable("id") long id) {
         service.deleteCity(id);
-        return new ResponseEntity<>("City Deleted Successfully", HttpStatus.OK);
+//        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 }
