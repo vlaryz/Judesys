@@ -29,7 +29,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request,
+                                                HttpServletResponse response) throws AuthenticationException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         var params = request.getParameterMap();
@@ -37,18 +38,23 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             System.out.println("Key = " + entry.getKey() +
                     ", Value = " + entry.getValue().toString());
         System.out.println("attemptAuthentication: " + username + " " + password);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(username, password);
         return authenticationManager.authenticate(authenticationToken);
 
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request,
+                                            HttpServletResponse response,
+                                            FilterChain chain,
+                                            Authentication authentication) throws IOException, ServletException {
         User user = (User)authentication.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+
         String access_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))   //10min
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 1000))   //10min
                 .withIssuer("Judesys")
                 .withClaim("roles", user.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
@@ -56,7 +62,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))   //10min
+                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))   //30min
                 .withIssuer("Judesys")
                 .sign(algorithm);
 //        response.setHeader("access_token", access_token);

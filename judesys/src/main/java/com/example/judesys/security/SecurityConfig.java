@@ -11,7 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -30,8 +32,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
+        http.authorizeRequests().antMatchers("/api/users/token/refresh/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/cities/**",
+                        "/api/cities/events/**",
+                        "/api/cities/events/tickets/**")
+                .permitAll();
+        http.authorizeRequests().antMatchers("/api/cities/**",
+                        "/api/cities/events/**",
+                        "/api/cities/events/tickets/**")
+                .hasAnyAuthority("ROLE_ADMIN");
+//        http.authorizeRequests().antMatchers(POST, "/api/cities/**",
+//                        "/api/cities/events/**",
+//                        "/api/cities/events/tickets/**")
+//                .hasAnyAuthority("ROLE_USER");
+//        http.authorizeRequests().antMatchers(PUT, "/api/cities/**",
+//                        "/api/cities/events/**",
+//                        "/api/cities/events/tickets/**")
+//                .hasAnyAuthority("ROLE_USER");
+//        http.authorizeRequests().antMatchers(DELETE, "/api/cities/**",
+//                        "/api/cities/events/**",
+//                        "/api/cities/events/tickets/**")
+//                .hasAnyAuthority("ROLE_USER");
+
         http.authorizeRequests().anyRequest().permitAll();
         http.addFilter(new AuthenticationFilter(authenticationManagerBean()));
+        http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

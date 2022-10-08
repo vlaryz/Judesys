@@ -39,7 +39,7 @@ public class UserService implements IUserService, UserDetailsService {
             throw new ResourceNotFoundException("User", "username", registerUserRequest.getUserName());
         registerUserRequest.setPassword(passwordEncoder.encode(registerUserRequest.getPassword()));
         var user = registerUserRequest.getUser();
-        user.getRoles().add(new Role("ROLE_UNREGISTERED"));
+        user.getRoles().add(new Role("ROLE_USER"));
 
         return userRepository.save(user);
     }
