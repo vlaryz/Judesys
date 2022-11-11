@@ -6,8 +6,11 @@ import com.example.judesys.exceptions.BadRequestParamsException;
 import com.example.judesys.exceptions.ResourceNotFoundException;
 import com.example.judesys.interfaces.ICityRepository;
 import com.example.judesys.interfaces.ICityService;
+import com.example.judesys.interfaces.IUserService;
 import com.example.judesys.models.City;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.Optional;
 public class CityService implements ICityService {
 
     private final ICityRepository repository;
+    private final IUserService userService;
 
     @Override
     public CityResponse saveCity(CityRequest city) {
@@ -29,7 +33,13 @@ public class CityService implements ICityService {
                     throw new RuntimeException(e);
                 }
         }
-        return new CityResponse(repository.save((city.getCity())));
+
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        var userId =  userService.getUser(userName).getId();
+        var savedCity = city.getCity();
+        savedCity.setCreatedBy(userId);
+
+        return new CityResponse(repository.save(savedCity));
     }
 
     @Override
@@ -47,9 +57,14 @@ public class CityService implements ICityService {
 
     @Override
     public CityResponse updateCity(CityRequest city, long id) {
-        System.out.println(city.toString());
+//        System.out.println(city.toString());
+
         City existingCity = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("City", "Id", id));
+
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        if(userService.getUser(userName).getId() != existingCity.getCreatedBy())
+           return null;
 
         existingCity.setName(city.getName());
         repository.save(existingCity);
@@ -57,9 +72,15 @@ public class CityService implements ICityService {
     }
 
     @Override
-    public void deleteCity(long id) {
-        repository.findById(id).orElseThrow(() ->
+    public boolean deleteCity(long id) {
+        var city = repository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("City", "Id", id));
+
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        if(userService.getUser(userName).getId() != city.getCreatedBy())
+            return false;
+
         repository.deleteById(id);
+        return true;
     }
 }

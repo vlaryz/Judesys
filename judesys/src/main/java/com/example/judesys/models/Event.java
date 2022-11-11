@@ -22,6 +22,9 @@ public class Event {
     @OneToMany(mappedBy="event")
     private List<Ticket> tickets;
 
+    @Column(name = "createdBy")
+    private long createdBy;
+
     @ManyToOne()
     @JoinColumn(name = "fk_cityId", nullable = false)
     private City city;

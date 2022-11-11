@@ -54,7 +54,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         String access_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 1000))   //10min
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 100000))   //1000min
                 .withIssuer("Judesys")
                 .withClaim("roles", user.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
@@ -62,7 +62,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))   //30min
+                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 100000))   //1000min
                 .withIssuer("Judesys")
                 .sign(algorithm);
 //        response.setHeader("access_token", access_token);

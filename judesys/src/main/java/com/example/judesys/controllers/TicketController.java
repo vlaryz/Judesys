@@ -50,16 +50,20 @@ public class TicketController {
                                                        @PathVariable(value = "eventId") Long eventId,
                                                        @PathVariable(value = "cityId") Long cityId,
                                                        @RequestBody @Valid TicketRequest ticketRequest) {
-        return new ResponseEntity<>(service.updateTicket(cityId, eventId, id, ticketRequest), HttpStatus.OK);
+        var result = service.updateTicket(cityId, eventId, id, ticketRequest);
+        if(result == null)
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @CrossOrigin
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteTicket(@PathVariable("id") long id,
+    public ResponseEntity<?> deleteTicket(@PathVariable("id") long id,
                                                @PathVariable(value = "eventId") Long eventId,
                                                @PathVariable(value = "cityId") Long cityId) {
-        service.deleteTicket(cityId, eventId, id);
-//        return new ResponseEntity<>("Ticket Deleted Successfully", HttpStatus.OK);
+        var result = service.deleteTicket(cityId, eventId, id);
+        if(!result)
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

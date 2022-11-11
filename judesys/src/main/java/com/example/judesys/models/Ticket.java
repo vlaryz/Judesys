@@ -21,6 +21,9 @@ public class Ticket {
     @Column(name = "type", nullable = false)
     private TicketType type;
 
+    @Column(name = "createdBy")
+    private long createdBy;
+
     @ManyToOne()
     @JoinColumn(name = "fk_eventId", nullable = false)
     private Event event;

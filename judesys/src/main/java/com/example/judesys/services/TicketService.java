@@ -4,13 +4,11 @@ import com.example.judesys.contracts.EventResponse;
 import com.example.judesys.contracts.TicketRequest;
 import com.example.judesys.contracts.TicketResponse;
 import com.example.judesys.exceptions.ResourceNotFoundException;
-import com.example.judesys.interfaces.ICityRepository;
-import com.example.judesys.interfaces.IEventRepository;
-import com.example.judesys.interfaces.ITicketRepository;
-import com.example.judesys.interfaces.ITicketService;
+import com.example.judesys.interfaces.*;
 import com.example.judesys.models.Event;
 import com.example.judesys.models.Ticket;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,9 +23,16 @@ public class TicketService implements ITicketService {
 
     private final ICityRepository cityRepository;
 
+    private final IUserService userService;
+
     @Override
     public TicketResponse saveTicket(long cityId, long eventId, TicketRequest ticketRequest) {
         Ticket ticket = ticketRequest.getTicket();
+
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        var userId =  userService.getUser(userName).getId();
+        ticket.setCreatedBy(userId);
+
         var event = eventRepository.findByCityIdAndId(cityId, eventId);
         System.out.println("eventas: " + event.get().getName());
         if(!event.isPresent())
@@ -57,16 +62,29 @@ public class TicketService implements ITicketService {
         Ticket existingTicket = ticketRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Ticket", "Id", id));
 
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        var userId =  userService.getUser(userName).getId();
+        if(existingTicket.getCreatedBy() != userId)
+            return null;
+
         existingTicket.setPrice(ticketRequest.getPrice());
         existingTicket.setType(ticketRequest.getType());
         ticketRepository.save(existingTicket);
+
         return new TicketResponse(existingTicket);
     }
 
     @Override
-    public void deleteTicket(long cityId, long eventId, long id) {
-        ticketRepository.findById(id).orElseThrow(() ->
+    public boolean deleteTicket(long cityId, long eventId, long id) {
+        var ticket = ticketRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Ticket", "Id", id));
+
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        var userId =  userService.getUser(userName).getId();
+        if(ticket.getCreatedBy() != userId)
+            return false;
+
         ticketRepository.deleteById(id);
+        return true;
     }
 }

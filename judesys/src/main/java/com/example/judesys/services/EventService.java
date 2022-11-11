@@ -6,8 +6,10 @@ import com.example.judesys.exceptions.ResourceNotFoundException;
 import com.example.judesys.interfaces.ICityRepository;
 import com.example.judesys.interfaces.IEventRepository;
 import com.example.judesys.interfaces.IEventService;
+import com.example.judesys.interfaces.IUserService;
 import com.example.judesys.models.Event;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,9 +23,15 @@ public class EventService implements IEventService {
     private final IEventRepository eventRepository;
     private final ICityRepository cityRepository;
 
+    private final IUserService userService;
+
     @Override
     public EventResponse saveEvent(EventRequest eventRequest, long cityId) {
         Event event = eventRequest.getEvent();
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        var userId =  userService.getUser(userName).getId();
+        event.setCreatedBy(userId);
+
         return new EventResponse(cityRepository.findById(cityId).map(city -> {
             event.setCity(city);
             return eventRepository.save(event);
@@ -50,6 +58,10 @@ public class EventService implements IEventService {
         var existingEvent = eventRepository.findByCityIdAndId(cityId, id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", id));
 
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        if(userService.getUser(userName).getId() != existingEvent.getCreatedBy())
+            return null;
+
         existingEvent.setName(event.getEvent().getName());
         existingEvent.setFree(event.getEvent().isFree());
         eventRepository.save(existingEvent);
@@ -57,7 +69,15 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public long deleteEvent(long id, long cityId) {
-       return eventRepository.deleteByCityIdAndId(cityId, id);
+    public boolean deleteEvent(long id, long cityId) {
+        var event = eventRepository.findByCityIdAndId(cityId, id)
+                .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", id));
+
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        if(userService.getUser(userName).getId() != event.getCreatedBy())
+            return false;
+
+        eventRepository.deleteByCityIdAndId(cityId, id);
+        return true;
     }
 }

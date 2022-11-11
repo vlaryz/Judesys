@@ -41,14 +41,18 @@ public class EventController {
     @CrossOrigin
     @PutMapping(value = "/{id}")
     public ResponseEntity<EventResponse> updateEvent(@PathVariable (value = "cityId") Long cityId, @PathVariable("id") long id, @RequestBody @Valid EventRequest event) {
-        return new ResponseEntity<>(service.updateEvent(event, id, cityId), HttpStatus.OK);
+        var result = service.updateEvent(event, id, cityId);
+        if(result == null)
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @CrossOrigin
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteEvent(@PathVariable (value = "cityId") Long cityId, @PathVariable("id") long id) {
-        service.deleteEvent(id, cityId);
-//        return new ResponseEntity<>(, HttpStatus.OK);
+    public ResponseEntity<?> deleteEvent(@PathVariable (value = "cityId") Long cityId, @PathVariable("id") long id) {
+        var result = service.deleteEvent(id, cityId);
+        if(!result)
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

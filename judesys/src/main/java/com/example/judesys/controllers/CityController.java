@@ -42,13 +42,18 @@ public class CityController {
     @CrossOrigin
     @PutMapping(value = "/{id}")
     public ResponseEntity<CityResponse> updateCity(@PathVariable("id") long id, @RequestBody @Valid CityRequest city) {
-        return new ResponseEntity<>(service.updateCity(city, id), HttpStatus.OK);
+        var result = service.updateCity(city, id);
+        if(result == null)
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @CrossOrigin
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteCity(@PathVariable("id") long id) {
-        service.deleteCity(id);
+    public ResponseEntity<?> deleteCity(@PathVariable("id") long id) {
+        var result = service.deleteCity(id);
+        if(!result)
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

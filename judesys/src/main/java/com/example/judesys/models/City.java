@@ -17,6 +17,9 @@ public class City {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "createdBy")
+    private long createdBy;
+
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private List<Event> events;
 

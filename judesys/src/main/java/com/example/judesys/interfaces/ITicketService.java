@@ -15,5 +15,5 @@ public interface ITicketService {
 
     TicketResponse updateTicket(long cityId, long eventId, long id, TicketRequest ticketRequest);
 
-    void deleteTicket(long cityId, long eventId, long id);
+    boolean deleteTicket(long cityId, long eventId, long id);
 }

@@ -15,5 +15,5 @@ public interface IEventService {
 
     EventResponse updateEvent(EventRequest eventRequest, long id, long cityId);
 
-    long deleteEvent(long id, long cityId);
+    boolean deleteEvent(long id, long cityId);
 }

@@ -15,5 +15,5 @@ public interface ICityService {
 
     CityResponse updateCity(CityRequest city, long id);
 
-    void deleteCity(long id);
+    boolean deleteCity(long id);
 }
