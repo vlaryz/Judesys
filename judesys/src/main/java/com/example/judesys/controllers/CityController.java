@@ -35,8 +35,9 @@ public class CityController {
 
     @CrossOrigin
     @GetMapping(value = "/")
-    public ResponseEntity<List<CityResponse>> getAllCities() {
+    public ResponseEntity<?> getAllCities() {
         return new ResponseEntity<>(service.getAllCities(), HttpStatus.OK);
+//        return new ResponseEntity<>(, HttpStatus.OK);
     }
 
     @CrossOrigin
