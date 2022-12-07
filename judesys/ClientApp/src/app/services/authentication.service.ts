@@ -21,7 +21,7 @@ export class AuthenticationService {
     );
   }
 
-  public register(credentials: { email: string, password: string }): Observable<any> {
-    return this.httpService.post<{ token: string }>('/api/users', '', credentials);
+  public register(credentials: { userName: string, name: string, surname: string, email: string, password: string }): Observable<any> {
+    return this.httpService.post<{ token: string }>('/api/users', '/', credentials);
   }
 }

@@ -1,0 +1,55 @@
+<div class="full-height-centered-flex-container">
+    <mat-card>
+        <div class="card-content-wrapper">
+            <div>
+                <mat-icon>account_circle</mat-icon>
+                <h1>Registration</h1>
+            </div>
+            <form [formGroup]="registrationFormGroup" (ngSubmit)="register()">
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Username</mat-label>
+                  <input formControlName="userName" type="text" matInput required placeholder="Enter your username">
+                  <mat-icon matSuffix>profile</mat-icon>
+                </mat-form-field>
+              </div>
+
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input formControlName="name" type="text" matInput required placeholder="Enter your name">
+                  <mat-icon matSuffix>name</mat-icon>
+                </mat-form-field>
+              </div>
+
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Surname</mat-label>
+                  <input formControlName="surname" type="text" matInput required placeholder="Enter your surname">
+                  <mat-icon matSuffix>surname</mat-icon>
+                </mat-form-field>
+              </div>
+
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email" type="email" matInput required placeholder="Enter your email">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-hint routerLink="/login" [align]="'end'" style="cursor: pointer;">Already have an account? Login here</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input formControlName="password" type="password" matInput required placeholder="Enter your password">
+                        <mat-icon matSuffix>vpn_key</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button type="submit" mat-raised-button color="primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</div>

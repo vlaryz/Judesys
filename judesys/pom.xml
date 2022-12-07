@@ -126,7 +126,7 @@
 							<outputDirectory>${project.build.directory}/classes/static/</outputDirectory >
 						<resources>
 							<resource>
-								<directory>ClientApp/dist/client-app</directory>
+								<directory>ClientApp/dist/client-app/</directory>
 							</resource>
 						</resources>
 						</configuration>

@@ -20,6 +20,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import { CitiesListComponent } from './components/cities-list/cities-list.component';
+import {RegisterComponent} from "./components/register/register.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CitiesListComponent } from './components/cities-list/cities-list.compon
     HomeScreenComponent,
     AppContainerComponent,
     LoginComponent,
+    RegisterComponent,
     CitiesListComponent
   ],
   imports: [

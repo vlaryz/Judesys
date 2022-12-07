@@ -76,7 +76,7 @@ public class AuthController {
 
                 String accessToken = JWT.create()
                         .withSubject(user.getUsername())
-                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))   //10min
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 100000))   //10min
                         .withIssuer("Judesys")
                         .withClaim("roles", user.getRoles().stream()
                                 .map(Role::getName).collect(Collectors.toList()))
