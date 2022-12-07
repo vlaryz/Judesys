@@ -37,11 +37,13 @@ public class AuthController {
     private final IUserService userService;
 
     @GetMapping("/")
+    @CrossOrigin
     public ResponseEntity<?> getUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
     @PostMapping("/")
+    @CrossOrigin
     public ResponseEntity<?> registerUser(@RequestBody RegisterUserRequest registerUserRequest) {
         return new ResponseEntity<>(userService.saveUser(registerUserRequest), HttpStatus.CREATED);
     }
@@ -58,6 +60,7 @@ public class AuthController {
     }
 
     @GetMapping("/token/refresh")
+    @CrossOrigin
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authHeader = request.getHeader(AUTHORIZATION);
