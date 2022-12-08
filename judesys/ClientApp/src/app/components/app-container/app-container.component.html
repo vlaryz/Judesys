@@ -1,50 +1,90 @@
-<mat-toolbar color="primary" class="mat-elevation-z8">
-  <span class="sitename">JUDESYS.LT</span>
-  <span class="navbar-spacer"></span>
-    <button mat-button routerLink="/cities">
-      Explore Cities
+<div style="height: calc(100vh - 65px);">
+<mat-toolbar color="primary">
+  <div fxShow="true" fxHide.gt-sm="true">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
     </button>
-  <button mat-button routerLink="/">
-    Explore Events
-  </button>
-  <button mat-button routerLink="/">
-    Explore Free Events
-  </button>
+  </div>
+
+  <a mat-button class="companyName" routerLink="/">
+    <span class="sitename">JUDESYS.LT</span>
+  </a>
+  <span class="example-spacer"></span>
+  <div fxShow="true" fxHide.lt-md="true">
+        <button mat-button routerLink="/cities">
+          Explore Cities
+        </button>
+      <button mat-button routerLink="/">
+        Explore Events
+      </button>
+      <button mat-button routerLink="/">
+        Explore Free Events
+      </button>
+<!--      <span class="navbar-spacer"></span>-->
+
+    <button mat-button routerLink="/login">
+        Login
+      </button>
+      <button mat-button routerLink="/register">
+        Register
+      </button>
+<!--    <a mat-button routerLink="/prices">Prices</a>-->
+<!--    <a mat-button routerLink="/start-page">Start page</a>-->
+<!--    <a mat-button routerLink="/offer">Offer</a>-->
+<!--    <a mat-button routerLink="/contact">Contact</a>-->
+  </div>
+  <span class="example-spacer"></span>
+
+
+</mat-toolbar>
+<mat-sidenav-container fxFlexFill class="example-container">
   <span class="navbar-spacer"></span>
-  <button mat-button routerLink="/login">
-    Login
-  </button>
-  <button mat-button routerLink="/register">
-    Register
-  </button>
+
+  <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+    <div fxLayout="column">
+      <button mat-button routerLink="/cities">
+        Explore Cities
+      </button>
+      <button mat-button routerLink="/">
+        Explore Events
+      </button>
+      <button mat-button routerLink="/">
+        Explore Free Events
+      </button>
+      <span class="navbar-spacer"></span>
+      <button mat-button routerLink="/login">
+        Login
+      </button>
+      <button mat-button routerLink="/register">
+        Register
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</div>
+
+
+<!--<mat-toolbar color="primary" class="mat-elevation-z8">-->
+<!--  <span class="sitename">JUDESYS.LT</span>-->
 <!--  <span class="navbar-spacer"></span>-->
-<!--    <button mat-icon-button matTooltip="Profile" routerLink="profile">-->
-<!--      <mat-icon>account_circle</mat-icon>-->
+<!--    <button mat-button routerLink="/cities">-->
+<!--      Explore Cities-->
 <!--    </button>-->
-<!--    <button mat-icon-button matTooltip="friends" routerLink="friends">-->
-<!--      <mat-icon>people</mat-icon>-->
-<!--    </button>-->
-<!--    <button mat-icon-button matTooltip="Inventory" routerLink="inventory">-->
-<!--        <mat-icon>backpack</mat-icon>-->
-<!--    </button>-->
-<!--    <button mat-icon-button matTooltip="Achievements" routerLink="achievements">-->
-<!--        <mat-icon>emoji_events</mat-icon>-->
-<!--    </button>-->
-<!--    <span class="navbar-spacer"></span>-->
-<!--    <button mat-icon-button matTooltip="Global players" routerLink="players">-->
-<!--      <mat-icon>person_search</mat-icon>-->
+<!--  <button mat-button routerLink="/">-->
+<!--    Explore Events-->
 <!--  </button>-->
-<!--    <button mat-icon-button matTooltip="Public games" routerLink="games">-->
-<!--        <mat-icon>travel_explore</mat-icon>-->
-<!--    </button>-->
-<!--    <button mat-icon-button matTooltip="Create game" routerLink="createGame">-->
-<!--      <mat-icon>add_circle</mat-icon>-->
-<!--    </button>-->
-<!--    <button mat-icon-button matTooltip="Notifications" routerLink="notifications">-->
-<!--      <mat-icon>notifications</mat-icon>-->
-<!--    </button>-->
-<!--    <button mat-icon-button matTooltip="Logout">-->
-<!--      <mat-icon>logout</mat-icon>-->
-<!--    </button>-->
-  </mat-toolbar>
-<router-outlet></router-outlet>
+<!--  <button mat-button routerLink="/">-->
+<!--    Explore Free Events-->
+<!--  </button>-->
+<!--  <span class="navbar-spacer"></span>-->
+<!--  <button mat-button routerLink="/login">-->
+<!--    Login-->
+<!--  </button>-->
+<!--  <button mat-button routerLink="/register">-->
+<!--    Register-->
+<!--  </button>-->
+<!--  </mat-toolbar>-->
+

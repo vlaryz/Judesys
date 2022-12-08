@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [UnauthorizedRouteGuard]},
   { path: '', component: AppContainerComponent, children: [
       { path: '', component: HomeScreenComponent},
-      { path: 'cities', component: CitiesListComponent, canActivate: [AuthorizedRouteGuard]}
+      { path: 'cities', component: CitiesListComponent, canActivate: [UnauthorizedRouteGuard]}
     ]
   }
 ];

@@ -1,1 +1,18 @@
-<p>cities-list works!</p>
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let city of cities">
+      <mat-card class="mat-elevation-z4" >
+        <mat-card-header>
+          <mat-card-title>{{city.name}}</mat-card-title>
+        </mat-card-header>
+<!--        <img mat-card-image src="./../assets/images/mountains.jpg">-->
+        <mat-card-content>
+          Fantastic city with lots of activities and events. Join now!
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button>Explore events</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

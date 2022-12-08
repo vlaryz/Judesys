@@ -21,6 +21,9 @@ import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import { CitiesListComponent } from './components/cities-list/cities-list.component';
 import {RegisterComponent} from "./components/register/register.component";
+import {MatListModule} from "@angular/material/list";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -31,22 +34,25 @@ import {RegisterComponent} from "./components/register/register.component";
     RegisterComponent,
     CitiesListComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        RouterModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatListModule,
+        FlexLayoutModule,
+        MatSidenavModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
