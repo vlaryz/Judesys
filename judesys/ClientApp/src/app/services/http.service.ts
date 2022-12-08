@@ -10,7 +10,7 @@ export class HttpService {
   private baseUrl = "https://web-app-judesys.azurewebsites.net/";
 
   constructor(
-    private readonly httpClient: HttpClient,
+    private readonly httpClient: HttpClient
     ) { }
 
     public get<TResponse = any>(controller: string, endpoint: string): Observable<TResponse> {
