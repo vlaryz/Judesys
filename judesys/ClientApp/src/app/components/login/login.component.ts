@@ -27,8 +27,10 @@ export class LoginComponent {
     formData.append('username', this.loginFormGroup.get('email')?.value);
     formData.append('password', this.loginFormGroup.get('password')?.value);
 
-    this.loginService.login(formData).pipe(
-      tap(() => this.router.navigateByUrl(''))
-    ).subscribe();
+    console.log("formadata: " + formData.get('username'));
+    console.log("formadata: " + formData.get('password'));
+    this.loginService.login(formData).subscribe(x => {
+      console.log(x);
+    })
   }
 }

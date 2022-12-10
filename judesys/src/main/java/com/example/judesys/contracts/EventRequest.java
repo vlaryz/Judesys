@@ -16,7 +16,10 @@ public class EventRequest {
 
     private String name;
     private boolean isFree;
+    private String shortDescription;
+    private String longDescription;
+
     public Event getEvent() {
-        return new Event(this.name, this.isFree);
+        return new Event(this.name, this.isFree, this.shortDescription, this.longDescription);
     }
 }

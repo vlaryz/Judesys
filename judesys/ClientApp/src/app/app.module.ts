@@ -27,6 +27,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { CityEventsComponent } from './components/city-events/city-events.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EventTicketBuyComponent } from './components/event-ticket-buy/event-ticket-buy.component';
+import { EventListComponent } from './components/event-list/event-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     RegisterComponent,
     CitiesListComponent,
     CityEventsComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    EventTicketBuyComponent,
+    EventListComponent
   ],
     imports: [
         BrowserModule,

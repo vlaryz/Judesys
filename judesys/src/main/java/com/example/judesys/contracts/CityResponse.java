@@ -17,10 +17,12 @@ import java.util.Set;
 public class CityResponse {
     private long id;
     private String name;
+    private String image;
 
     public CityResponse(City city) {
         this.id = city.getId();
         this.name = city.getName();
+        this.image = city.getImage();
     }
     public static CityResponse fromCity (City city){
         return new CityResponse(city);

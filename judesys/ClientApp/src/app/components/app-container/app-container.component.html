@@ -52,12 +52,20 @@
         Explore Free Events
       </button>
       <span class="navbar-spacer"></span>
-      <button mat-button routerLink="/login">
-        Login
-      </button>
-      <button mat-button routerLink="/register">
-        Register
-      </button>
+      <div *ngIf="!checkIfLoggedIn()">
+        <button mat-button routerLink="/login">
+          Login
+        </button>
+        <button mat-button routerLink="/register">
+          Register
+        </button>
+      </div>
+      <div *ngIf="checkIfLoggedIn()">
+        Logged in
+        <button mat-button routerLink="/logout">
+          Logout
+        </button>
+      </div>
     </div>
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>

@@ -1,0 +1,28 @@
+<div class="full-height-centered-flex-container" style="width: 80%; margin: auto;">
+  <p mat-dialog-title>{{event.name}}</p>
+  <mat-card>
+  <mat-dialog-content class="mat-typography">
+    <h3><strong>City</strong></h3>
+    <p>{{city.name}}</p>
+
+    <h3><strong>Description</strong></h3>
+    <p>{{event.longDescr}}</p>
+
+    <h3><strong>Tickets Count</strong></h3>
+    <p>VIP: {{vipTickets.length}}</p>
+    <p>Basic: {{basicTickets.length}}</p>
+
+    <h3><strong>Tickets Prices</strong></h3>
+    <p *ngIf="event.free">Free</p>
+    <div *ngIf="!event.free">
+      <p>VIP from {{vipTickets[0].price}}€</p>
+      <p>Basic from {{basicTickets[0].price}}€</p>
+    </div>
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close>Buy ticket</button>
+  </mat-dialog-actions>
+  </mat-card>
+</div>

@@ -1,4 +1,5 @@
 export interface CityResponse {
   id: string,
-  name: string
+  name: string,
+  image?: string
 }

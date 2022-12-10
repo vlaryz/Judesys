@@ -1,4 +1,5 @@
 <h1 class="mat-h1" style="text-align: center;">{{city}}</h1>
+<h1 *ngIf="events.length == 0" class="mat-h1" style="text-align: center;">Currently There Are No Evenets in {{city}} :(</h1>
 
 <div class="content">
   <div fxLayout="column wrap" fxLayoutGap="16px grid">
@@ -7,18 +8,16 @@
         <mat-card-header>
           <mat-card-title>{{event.name}}</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mollis dolor at nunc faucibus, sit amet ultrices nisl posuere. Etiam semper, turpis sed blandit aliquam, ex sem finibus orci, nec eleifend ligula erat sit amet orci. Donec ornare ante lorem, eget pharetra urna euismod a. In pharetra et magna eget pretium. Phasellus pharetra massa erat, eget tempus libero laoreet id. Mauris dictum sem leo, sit amet condimentum elit tristique id. Proin porta enim vel egestas mattis.
-
-          Fusce facilisis id tortor non imperdiet. Proin vestibulum eleifend metus at cursus. Nunc vel nulla at sem ultricies vulputate sed nec nibh. Fusce volutpat purus non risus gravida auctor. Sed feugiat metus sagittis ante sollicitudin congue. Donec condimentum mattis massa. Nam et consequat quam. Cras venenatis, tortor id eleifend mollis, turpis enim sagittis quam, imperdiet mattis neque augue eu elit. Nunc id risus augue. Nunc sed diam sit amet tortor bibendum egestas nec pulvinar turpis. Aenean vitae velit eget eros commodo ornare. Donec tincidunt lacus vel nibh varius faucibus. Pellentesque at orci id odio dapibus sollicitudin. Phasellus nec tristique odio, ut gravida mauris.
-          <div *ngIf="event.free"  style="text-align: center; background: green; width: 20%; border-radius: 10px;">
+        <mat-card-content >
+          <p >{{event.shortDescr}}</p>
+          <div *ngIf="event.free"  style="text-align: center; background: green; width: 10%; border-radius: 10px;">
             <h3 class="mat-h3" style="color: white;">Totally Free!</h3>
           </div>
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button (click)="openDialog(event)">Details</button>
 <!--          <div *ngIf="!event.free">-->
-            <button *ngIf="!event.free" mat-raised-button [routerLink]="['/cities', event.id]">Buy ticket</button>
+            <button *ngIf="!event.free" mat-raised-button [routerLink]="['/cities', 3, 'events', event.id]">Buy ticket</button>
 <!--          </div>-->
         </mat-card-actions>
       </mat-card>

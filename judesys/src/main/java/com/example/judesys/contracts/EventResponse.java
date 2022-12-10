@@ -15,13 +15,17 @@ public class EventResponse {
     private long id;
     private String name;
     private boolean isFree;
+    private String shortDescr;
+    private String longDescr;
 
     public EventResponse(Event event) {
         this.id = event.getId();
         this.name = event.getName();
         this.isFree = event.isFree();
+        this.shortDescr = event.getShortDesription();
+        this.longDescr = event.getLongDesription();
     }
     public static EventResponse fromEvent (Event event){
-        return new EventResponse(event.getId(), event.getName(), event.isFree());
+        return new EventResponse(event.getId(), event.getName(), event.isFree(), event.getShortDesription(), event.getLongDesription());
     }
 }

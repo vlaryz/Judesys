@@ -17,14 +17,18 @@ public class City {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "img")
+    private String image;
+
     @Column(name = "createdBy")
     private long createdBy;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private List<Event> events;
 
-    public City(String name) {
+    public City(String name, String image) {
         this.name = name;
+        this.image = image;
     }
 
     public City() {

@@ -43,7 +43,7 @@ export class CityEventsComponent implements OnInit {
     const dialogRef = this.dialog.open(EventDetailsComponent,
       {
         data: event,
-        width: '30%',
+        width: '80%',
       });
 
     dialogRef.afterClosed().subscribe(_ => {

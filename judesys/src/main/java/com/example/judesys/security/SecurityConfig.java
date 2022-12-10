@@ -12,6 +12,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
@@ -28,11 +31,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-
+        http.cors();
 
 //        http.authorizeRequests().antMatchers("/api/users/token/refresh/**").permitAll();
 //        http.authorizeRequests().antMatchers(GET, "/api/cities/**",
@@ -50,8 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 ////        http.authorizeRequests().antMatchers(PUT, "/api/cities/**",
 ////                        "/api/cities/events/**",
 ////                        "/api/cities/events/tickets/**")
-////                .hasAnyAuthority("ROLE_USER");
-////        http.authorizeRequests().antMatchers(DELETE, "/api/cities/**",
+////                .permitAll();
+////        http.authorizeRequests().antMatchers("/api/cities/**",
 ////                        "/api/cities/events/**",
 ////                        "/api/cities/events/tickets/**")
 ////                .hasAnyAuthority("ROLE_USER");

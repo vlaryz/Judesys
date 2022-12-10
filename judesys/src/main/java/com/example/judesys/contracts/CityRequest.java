@@ -19,8 +19,10 @@ public class CityRequest {
 
     @NotBlank(message = "City not provided")
     private String name;
+    @NotBlank(message = "Image not provided")
+    private String image;
 
     public City getCity() {
-        return new City(this.name);
+        return new City(this.name, this.image);
     }
 }

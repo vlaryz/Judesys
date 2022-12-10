@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AuthorizationService } from './authorization.service';
 import { HttpService } from './http.service';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthenticationService {
   constructor(
     private httpService: HttpService,
     private authorizationService: AuthorizationService,
+    private readonly httpClient: HttpClient
   ) { }
 
   public login(login: FormData): Observable<{ access_token: string }> {

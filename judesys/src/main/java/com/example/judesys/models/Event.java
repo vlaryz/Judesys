@@ -15,10 +15,12 @@ public class Event {
     private long id;
     @Column(name = "name", nullable = false)
     private String name;
-
     @Column(name = "is_free", nullable = false)
     private boolean isFree;
-
+    @Column(name = "shortDesrc", nullable = false)
+    private String shortDesription;
+    @Column(name = "longDesrc", nullable = false)
+    private String longDesription;
     @OneToMany(mappedBy="event")
     private List<Ticket> tickets;
 
@@ -29,9 +31,11 @@ public class Event {
     @JoinColumn(name = "fk_cityId", nullable = false)
     private City city;
 
-    public Event(String name, boolean isFree) {
+    public Event(String name, boolean isFree, String shortDesription, String longDesription) {
         this.name = name;
         this.isFree = isFree;
+        this.shortDesription = shortDesription;
+        this.longDesription = longDesription;
     }
     public Event() {
 

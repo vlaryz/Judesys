@@ -12,6 +12,7 @@ export class EventDetailsComponent implements OnInit {
 
   public eventDescription: string = "";
   private price: string = "";
+  public event: EventsResponse = {} as EventsResponse;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EventsResponse,
@@ -19,6 +20,7 @@ export class EventDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventDescription = this.data.name;
+    this.event = this.data;
     this.price = String(this.data.free);
   }
 
