@@ -24,6 +24,9 @@ import {RegisterComponent} from "./components/register/register.component";
 import {MatListModule} from "@angular/material/list";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { CityEventsComponent } from './components/city-events/city-events.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     AppContainerComponent,
     LoginComponent,
     RegisterComponent,
-    CitiesListComponent
+    CitiesListComponent,
+    CityEventsComponent,
+    EventDetailsComponent
   ],
     imports: [
         BrowserModule,
@@ -51,9 +56,13 @@ import {MatSidenavModule} from "@angular/material/sidenav";
         MatInputModule,
         MatListModule,
         FlexLayoutModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatSidenavModule,
+        MatDialogModule
     ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

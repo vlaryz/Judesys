@@ -11,6 +11,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: center;
 }
 
+.full-width-centered-flex-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-content-wrapper {
   display: flex;
   flex-direction: column;

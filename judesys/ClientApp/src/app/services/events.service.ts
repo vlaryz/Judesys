@@ -2,23 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpService } from "./http.service";
 import { Observable } from 'rxjs';
 import {CityResponse} from "../models/cityResponse";
+import {EventsResponse} from "../models/eventsResponse";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class CitiesService {
+export class EventsService {
 
   constructor(
     private httpService: HttpService
   ) {
   }
 
-  public getCities(): Observable<CityResponse[]> {
-    return this.httpService.get('/api/cities', '/');
-  }
-
-  public getCity(id: string): Observable<CityResponse> {
-    return this.httpService.get('/api/cities/' + id, '');
+  public getAllCityEvents(cityId: string): Observable<EventsResponse[]> {
+    return this.httpService.get('/api/cities/' + cityId, '/events/');
   }
 }

@@ -8,13 +8,17 @@ import {CitiesListComponent} from "./components/cities-list/cities-list.componen
 import {UnauthorizedRouteGuard} from "./unauthorized-route.guard";
 import {AuthorizedRouteGuard} from "./authorized-route.guard";
 import {RegisterComponent} from "./components/register/register.component";
+import {CityEventsComponent} from "./components/city-events/city-events.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [UnauthorizedRouteGuard]},
   { path: 'register', component: RegisterComponent, canActivate: [UnauthorizedRouteGuard]},
   { path: '', component: AppContainerComponent, children: [
       { path: '', component: HomeScreenComponent},
-      { path: 'cities', component: CitiesListComponent, canActivate: [UnauthorizedRouteGuard]}
+      { path: 'cities',component: CitiesListComponent ,canActivate: [UnauthorizedRouteGuard]},
+      { path: 'cities/:id',component: CityEventsComponent ,canActivate: [UnauthorizedRouteGuard]}
+
+
     ]
   }
 ];
