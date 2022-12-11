@@ -16,12 +16,20 @@ export class AuthenticationService {
   ) { }
 
   public login(login: FormData): Observable<{ access_token: string }> {
-    return this.httpService.post<{ access_token: string }>('', '/login', login).pipe(
+    return this.httpService.post<{ access_token: string }>('/api/users', '/auth', {username: login.get('username'), password: login.get('password')}).pipe(
       tap(response => {
-        this.authorizationService.registerToken(response.access_token)
+        console.log(JSON.stringify(response));
+        this.authorizationService.registerToken(response.access_token);
       })
     );
   }
+  // public login(login: FormData): Observable<{ access_token: string }> {
+  //   return this.httpService.post<{ access_token: string }>('/api/users', '/auth', login).pipe(
+  //     tap(response => {
+  //       this.authorizationService.registerToken(response.access_token)
+  //     })
+  //   );
+  // }
 
   public register(credentials: { userName: string, name: string, surname: string, email: string, password: string }): Observable<any> {
     return this.httpService.post<{ token: string }>('/api/users', '/', credentials);

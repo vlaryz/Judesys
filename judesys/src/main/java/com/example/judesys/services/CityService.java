@@ -57,7 +57,7 @@ public class CityService implements ICityService {
 
     @Override
     public CityResponse updateCity(CityRequest city, long id) {
-//        System.out.println(city.toString());
+        System.out.println(city.toString());
 
         City existingCity = repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("City", "Id", id));

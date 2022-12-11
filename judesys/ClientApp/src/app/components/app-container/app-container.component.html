@@ -10,7 +10,6 @@
     <div class="icon">
       <mat-icon svgIcon="judesys" [inline]="true">done</mat-icon>
     </div>
-<!--    <mat-icon svgIcon="judesys"></mat-icon>-->
   </a>
   <span class="example-spacer"></span>
   <div fxShow="true" fxHide.lt-md="true">
@@ -24,7 +23,10 @@
         Explore Free Events
       </button>
     <button *ngIf="checkIfLoggedIn()" mat-icon-button matTooltip="Account">
-      <mat-icon>account_circle</mat-icon>Account
+      <mat-icon>account_circle</mat-icon>{{userName}}
+    </button>
+    <button *ngIf="checkIfAdmin()" mat-icon-button matTooltip="Admin panel" style="margin-left: 5%" mat-button routerLink="/admin">
+      <mat-icon>account_circle</mat-icon>Admin panel
     </button>
   </div>
   <span class="example-spacer"></span>
@@ -37,7 +39,7 @@
         Register
       </button>
 
-    <button *ngIf="checkIfLoggedIn()" mat-icon-button matTooltip="Logout" (click)="logout()">
+    <button *ngIf="checkIfLoggedIn()" mat-icon-button matTooltip="Logout" (click)="logout()" style="margin-right: 5%">
       <mat-icon>logout</mat-icon>Logout
     </button>
   </div>

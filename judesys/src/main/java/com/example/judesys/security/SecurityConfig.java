@@ -1,5 +1,6 @@
 package com.example.judesys.security;
 
+import com.google.common.collect.ImmutableList;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,12 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll();
+//        http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.cors();
+        http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll().and().formLogin().loginProcessingUrl("/api/users/login");
 
 //        http.authorizeRequests().antMatchers("/api/users/token/refresh/**").permitAll();
 //        http.authorizeRequests().antMatchers(GET, "/api/cities/**",

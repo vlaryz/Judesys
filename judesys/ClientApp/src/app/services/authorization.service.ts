@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import jwt_decode from "jwt-decode";
+import {JwtToken} from "../models/jwtToken";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,12 @@ export class AuthorizationService {
 
   public get jwtToken(): string {
     return this.jwtTokenSubject.value;
+  }
+
+  public checkIfAdmin(): boolean {
+    // console.log((jwt_decode(this.jwtToken) as JwtToken).roles);
+    // return true;
+    return (jwt_decode(this.jwtToken) as JwtToken).roles.includes("ROLE_ADMIN");
   }
 
   public getUserId(): string {

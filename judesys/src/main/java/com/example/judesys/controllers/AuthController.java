@@ -15,9 +15,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,6 +55,54 @@ public class AuthController {
     @CrossOrigin
     public ResponseEntity<?> registerUser(@RequestBody RegisterUserRequest registerUserRequest) {
         return new ResponseEntity<>(userService.saveUser(registerUserRequest), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    public ResponseEntity<?> getAuthenticationToken(@RequestBody LoginRequest yourRequestDTO, HttpServletRequest request,
+                                                    HttpServletResponse response) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            yourRequestDTO.getUsername(),
+                            yourRequestDTO.getPassword()
+                    )
+            );
+        } catch (BadCredentialsException e) {
+            return new ResponseEntity<>("pzdc", HttpStatus.BAD_REQUEST);
+        }
+        var x = authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(
+                yourRequestDTO.getUsername(),
+                yourRequestDTO.getPassword()
+        ));
+
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)x.getPrincipal();
+        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+
+        String access_token = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 100000))   //1000min
+                .withIssuer("Judesys")
+                .withClaim("roles", user.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .sign(algorithm);
+
+        String refresh_token = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 100000))   //1000min
+                .withIssuer("Judesys")
+                .sign(algorithm);
+//        response.setHeader("access_token", access_token);
+//        response.setHeader("refresh_token", refresh_token);
+
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("access_token", access_token);
+        tokens.put("refresh_token", refresh_token);
+        response.setContentType(APPLICATION_JSON_VALUE);
+        System.out.println("Giving back token");
+//        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
+        System.out.println(x.toString());
+        return new ResponseEntity<>(tokens, HttpStatus.OK);
     }
 
     @PostMapping("/roles/")

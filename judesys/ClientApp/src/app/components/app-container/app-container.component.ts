@@ -4,6 +4,8 @@ import {AuthorizationService} from "../../services/authorization.service";
 import {LogoutService} from "../../services/logout.service";
 import { MatIconRegistry } from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
+import jwt_decode from "jwt-decode";
+import {JwtToken} from "../../models/jwtToken";
 
 @Component({
   selector: 'app-app-container',
@@ -13,7 +15,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class AppContainerComponent {
 
   // public isLoggedIn: boolean = false;
-  public isLogged = true;
+  public userName: string = "";
 
   constructor(
     private authService: AuthorizationService,
@@ -25,14 +27,25 @@ export class AppContainerComponent {
       `judesys`,
       this.sanitizer.bypassSecurityTrustResourceUrl("../assets/judesys.svg")
     );
+
+    try {
+      this.userName = (jwt_decode(authService.jwtToken) as JwtToken).sub;
+
+    }
+    catch (e) {
+      console.log(e);
+    }
+    // console.log(authService.checkIfAdmin());
+    // console.log(dec.sub);
     // this.isLoggedIn = authService.isAuthorized;
   }
 
   public checkIfLoggedIn(): boolean {
-    // console.log("authorization: " + this.authService.isAuthorized);
-    // console.log(this.authService.jwtToken);
-    // console.log()
     return this.authService.isAuthorized;
+  }
+
+  public checkIfAdmin(): boolean {
+    return true;
   }
 
   public logout(): void {

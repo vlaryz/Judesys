@@ -1,0 +1,14 @@
+.content {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+:host ::ng-deep .mat-tab-body-wrapper {
+  height: 100%;
+
+}
+
+:host ::ng-deep .mat-tab-body.mat-tab-body-active {
+  height: 600px;
+
+}

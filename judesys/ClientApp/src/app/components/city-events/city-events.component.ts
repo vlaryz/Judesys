@@ -32,7 +32,6 @@ export class CityEventsComponent implements OnInit {
     })
     this.eventsService.getAllCityEvents(id).subscribe(x => {
       this.events = x;
-      console.log(this.events)
       // this.events.forEach(x => {
       //     console.log(x.name + " " + x.isFree)
       // })
@@ -47,7 +46,6 @@ export class CityEventsComponent implements OnInit {
       });
 
     dialogRef.afterClosed().subscribe(_ => {
-      console.log("fin");
     })
   }
 

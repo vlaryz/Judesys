@@ -29,9 +29,6 @@ export class TicketPurchaseComponent implements OnInit {
   public selectedCountTotal = <FormControl>(this.buyTicketForm.get('count'));
   public total: number = 0;
 
-  // public year = <FormControl>({this.buyTicketForm.get('count'), this.buyTicketForm.get('type')});
-
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {event: EventsResponse, cityid: string, eventid: string},
     private eventService: EventsService,
@@ -46,7 +43,6 @@ export class TicketPurchaseComponent implements OnInit {
 
     this.eventService.getEvent(cityId, eventId).subscribe(x => {
       this.event = x;
-      // console.log(this.event)
     })
 
     this.citiesService.getCity(cityId).subscribe(x => {
@@ -61,12 +57,10 @@ export class TicketPurchaseComponent implements OnInit {
 
     this.selectedCountTotal.valueChanges.subscribe(data => {
       this.total = +this.buyTicketForm.get('count')!.value! * (this.buyTicketForm.get('type')!.value == 'VIP' ? +this.vipTickets[0].price : +this.basicTickets[0].price);
-      console.log('Form changes', this.total);
     });
 
     this.selectedTypeTotal.valueChanges.subscribe(data => {
       this.total = +this.buyTicketForm.get('count')!.value! * (this.buyTicketForm.get('type')!.value == 'VIP' ? +this.vipTickets[0].price : +this.basicTickets[0].price);
-      console.log('Form changes', this.total);
     });
   }
 

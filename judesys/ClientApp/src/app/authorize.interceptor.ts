@@ -7,26 +7,28 @@ import { AuthorizationService } from './services/authorization.service';
   providedIn: 'root'
 })
 export class AuthorizeInterceptor implements HttpInterceptor {
-  
+
     constructor(
         private authorizationService: AuthorizationService
     ) { }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const jwtToken = this.authorizationService.jwtToken;
-    
+
     return this.processRequestWithToken(jwtToken, req, next)
   }
 
   private processRequestWithToken(token: string | null, request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!!token && this.isSameOriginUrl(request)) {
+
+    if (!!token) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`
         }
       });
+      console.log("requestL got yeet");
     }
-
+    console.log("requestL " + JSON.stringify(request));
     return next.handle(request);
   }
 

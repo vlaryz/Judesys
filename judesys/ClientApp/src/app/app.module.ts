@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 
@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import { CitiesListComponent } from './components/cities-list/cities-list.component';
@@ -31,6 +31,13 @@ import { EventTicketBuyComponent } from './components/event-ticket-buy/event-tic
 import { EventListComponent } from './components/event-list/event-list.component';
 import { TicketPurchaseComponent } from './components/ticket-purchase/ticket-purchase.component';
 import {MatSelectModule} from "@angular/material/select";
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import { CityEditComponent } from './components/city-edit/city-edit.component';
+import {AuthorizeInterceptor} from "./authorize.interceptor";
+import {CdkColumnDef} from "@angular/cdk/table";
+import { EventEditComponent } from './components/event-edit/event-edit.component';
+import { TicketEditComponent } from './components/ticket-edit/ticket-edit.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +52,10 @@ import {MatSelectModule} from "@angular/material/select";
     EventTicketBuyComponent,
     EventListComponent,
     TicketPurchaseComponent,
+    AdminPanelComponent,
+    CityEditComponent,
+    EventEditComponent,
+    TicketEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,9 +78,12 @@ import {MatSelectModule} from "@angular/material/select";
     MatSidenavModule,
     MatDialogModule,
     MatSelectModule,
+    MatTabsModule,
+    FormsModule,
   ],
   providers: [
-
+    [CdkColumnDef,{
+      provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }]
   ],
   bootstrap: [AppComponent]
 })

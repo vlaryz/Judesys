@@ -43,6 +43,7 @@ public class CityController {
     @CrossOrigin
     @PutMapping(value = "/{id}")
     public ResponseEntity<CityResponse> updateCity(@PathVariable("id") long id, @RequestBody @Valid CityRequest city) {
+        System.out.println("AAAAAAAAAA");
         var result = service.updateCity(city, id);
         if(result == null)
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

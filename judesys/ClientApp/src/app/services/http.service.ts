@@ -19,8 +19,19 @@ export class HttpService {
       return request;
     }
 
+    public delete<TResponse = any>(controller: string, endpoint: string): Observable<TResponse> {
+      const request = this.httpClient.delete<TResponse>(this.baseUrl + controller + endpoint);
+      return request;
+    }
+
     public post<TResponse = any>(controller: string, endpoint: string, body: any): Observable<TResponse> {
       const request = this.httpClient.post<TResponse>(this.baseUrl + controller + endpoint, body);
       return request;
     }
+
+    public put<TResponse = any>(controller: string, endpoint: string, body: any): Observable<TResponse> {
+    const request = this.httpClient.put<TResponse>(this.baseUrl + controller + endpoint, body);
+    return request;
+  }
+
 }

@@ -11,15 +11,16 @@ import {RegisterComponent} from "./components/register/register.component";
 import {CityEventsComponent} from "./components/city-events/city-events.component";
 import {EventListComponent} from "./components/event-list/event-list.component";
 import {EventTicketBuyComponent} from "./components/event-ticket-buy/event-ticket-buy.component";
+import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
   { path: '', component: AppContainerComponent, children: [
+      { path: 'login', component: LoginComponent},
+      { path: 'register', component: RegisterComponent},
+      { path: 'admin', component: AdminPanelComponent, canActivate: [AuthorizedRouteGuard]},
       { path: '', component: HomeScreenComponent},
       { path: 'cities',component: CitiesListComponent},
       { path: 'cities/:id',component: CityEventsComponent},
-      // { path: 'events',component: EventListComponent ,canActivate: [UnauthorizedRouteGuard]},
       { path: 'cities/:id1/events/:id2', component: EventTicketBuyComponent}
 
     ]

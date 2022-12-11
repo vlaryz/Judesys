@@ -1,0 +1,91 @@
+<div class="content">
+<!--<h1>Welcome to admin panel</h1>-->
+</div>
+
+<div class="content">
+  <div fxLayout="column wrap" fxLayoutGap="16px grid">
+      <mat-card class="mat-elevation-z4" class="full-width-centered-flex-container">
+        <mat-card-header>
+          <mat-card-title></mat-card-title>
+        </mat-card-header>
+        <mat-card-content >
+          <p><strong>Welcome to admin panel</strong></p>
+          <mat-tab-group animationDuration="200ms" (selectedTabChange)="handleTabClick()">
+            <mat-tab label="Cities">
+              <div class="full-height-centered-flex-container">
+                <mat-form-field appearance="outline">
+                  <mat-label>Cities</mat-label>
+                  <mat-select [(value)]="selectedCity" name="city">
+                    <mat-option *ngFor="let city of allCities" [value]="city">
+                      {{city.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div *ngIf="selectedCity.id != null">
+                  <h3><strong>Select action</strong></h3>
+                  <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="openCityEditDialog(selectedCity)">Edit</button>
+                    <button mat-raised-button color="warn" (click)="deleteCity()">Delete</button>
+                  </mat-card-actions>
+
+                </div>
+                <mat-card-actions>
+                <button mat-raised-button color="green" (click)="openAddEditDialog(selectedCity)">Add New City</button>
+                </mat-card-actions>
+
+              </div>
+            </mat-tab>
+            <mat-tab label="Events">
+              <div class="full-height-centered-flex-container">
+                <mat-form-field appearance="outline">
+                  <mat-label>Events</mat-label>
+                  <mat-select [(value)]="selectedEvent" name="city">
+                    <mat-option *ngFor="let event of allEvents" [value]="event">
+                      {{event.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div *ngIf="selectedEvent.id != null">
+                  <h3><strong>Select action</strong></h3>
+                  <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="openEventEditDialog(selectedEvent)">Edit</button>
+                    <button mat-raised-button color="warn" (click)="deleteEvent()">Delete</button>
+                  </mat-card-actions>
+
+                </div>
+                <mat-card-actions>
+                  <button mat-raised-button color="green" (click)="openAddEventDialog(selectedEvent)">Add New Event</button>
+                </mat-card-actions>
+
+              </div>
+            </mat-tab>
+            <mat-tab label="Tickets">
+              <div class="full-height-centered-flex-container">
+                <mat-form-field appearance="outline">
+                  <mat-label>Tickets</mat-label>
+                  <mat-select [(value)]="selectedTicket" name="ticket">
+                    <mat-option *ngFor="let ticket of allTickets" [value]="ticket">
+                      {{ticket.type}} {{(+ticket.price / 100)}}€
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div *ngIf="selectedTicket.id != null">
+                  <h3><strong>Select action</strong></h3>
+                  <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="openTicketEditDialog(selectedTicket)">Edit</button>
+                    <button mat-raised-button color="warn" (click)="deleteTicket()">Delete</button>
+                  </mat-card-actions>
+
+                </div>
+                <mat-card-actions>
+                  <button mat-raised-button color="green" (click)="openAddTicketDialog(selectedTicket)">Add New Event</button>
+                </mat-card-actions>
+
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </mat-card>
+  </div>
+</div>
+

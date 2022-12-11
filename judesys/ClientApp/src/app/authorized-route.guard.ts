@@ -21,6 +21,12 @@ export class AuthorizedRouteGuard implements CanActivate {
       return false;
     }
 
+    console.log("aitj: " + this.authorizationService.checkIfAdmin());
+    if (!this.authorizationService.checkIfAdmin()) {
+      this.router.navigateByUrl('/login');
+      return false;
+    }
+
     return true;
   }
 }
