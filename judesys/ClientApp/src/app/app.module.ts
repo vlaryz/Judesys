@@ -29,6 +29,8 @@ import { EventDetailsComponent } from './components/event-details/event-details.
 import { MatDialogModule } from '@angular/material/dialog';
 import { EventTicketBuyComponent } from './components/event-ticket-buy/event-ticket-buy.component';
 import { EventListComponent } from './components/event-list/event-list.component';
+import { TicketPurchaseComponent } from './components/ticket-purchase/ticket-purchase.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -41,29 +43,31 @@ import { EventListComponent } from './components/event-list/event-list.component
     CityEventsComponent,
     EventDetailsComponent,
     EventTicketBuyComponent,
-    EventListComponent
+    EventListComponent,
+    TicketPurchaseComponent,
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        RouterModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        MatIconModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatListModule,
-        FlexLayoutModule,
-        MatSidenavModule,
-        MatSidenavModule,
-        MatDialogModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    RouterModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    FlexLayoutModule,
+    MatSidenavModule,
+    MatSidenavModule,
+    MatDialogModule,
+    MatSelectModule,
+  ],
   providers: [
 
   ],

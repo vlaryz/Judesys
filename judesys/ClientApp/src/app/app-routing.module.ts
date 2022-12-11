@@ -20,10 +20,11 @@ const routes: Routes = [
       { path: 'cities',component: CitiesListComponent},
       { path: 'cities/:id',component: CityEventsComponent},
       // { path: 'events',component: EventListComponent ,canActivate: [UnauthorizedRouteGuard]},
-      { path: 'cities/:id1/events/:id2', component: EventTicketBuyComponent, canActivate: [UnauthorizedRouteGuard]}
+      { path: 'cities/:id1/events/:id2', component: EventTicketBuyComponent}
 
     ]
-  }
+  },
+  { path: '**', component: HomeScreenComponent }
 ];
 
 @NgModule({

@@ -1,0 +1,33 @@
+<div class="full-height-centered-flex-container" style="width: 80%; margin: auto;">
+<!--  <p mat-dialog-title>{{event.name}}</p>-->
+  <p mat-dialog-title>You are about to buy a ticket for {{event.name}}</p>
+  <p mat-dialog-title>Short description:</p>
+  <p mat-dialog-content>{{event.shortDescr}}</p>
+
+  <form [formGroup]="buyTicketForm" (ngSubmit)="buyTicket()">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+            <mat-select formControlName="type" required [(value)]="selectedType">
+              <mat-option value="VIP">VIP</mat-option>
+              <mat-option value="BASIC">Basic</mat-option>
+            </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Count</mat-label>
+        <input formControlName="count" matInput type="number" min="1">
+      </mat-form-field>
+    </div>
+    <div *ngIf="total != 0">
+      <h3>Total:<strong> {{(+total / 100)}}€</strong></h3>
+<!--      <p *ngIf="selectedType === '0'"><strong>{{(+vipTickets[0].price / 100)}}€</strong></p>-->
+<!--      <p *ngIf="selectedType === '1'"><strong>{{(+basicTickets[0].price / 100)}}€</strong></p>-->
+    </div>
+    <div>
+      <button type="submit" mat-raised-button color="primary">Purchase ticket</button>
+    </div>
+  </form>
+</div>

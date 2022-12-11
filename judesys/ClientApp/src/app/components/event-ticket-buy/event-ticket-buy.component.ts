@@ -6,6 +6,9 @@ import {CitiesService} from "../../services/cities.service";
 import {CityResponse} from "../../models/cityResponse";
 import {TicketsService} from "../../services/tickets.service";
 import {TicketResponse} from "../../models/ticketResponse";
+import {MatDialog} from "@angular/material/dialog";
+import {EventDetailsComponent} from "../event-details/event-details.component";
+import {TicketPurchaseComponent} from "../ticket-purchase/ticket-purchase.component";
 
 @Component({
   selector: 'app-event-ticket-buy',
@@ -19,6 +22,8 @@ export class EventTicketBuyComponent implements OnInit {
   public tickets: TicketResponse[] = [];
   public vipTickets: TicketResponse[] = [];
   public basicTickets: TicketResponse[] = [];
+  public cityid: string = "";
+  public eventid: string = "";
 
 
   constructor(
@@ -26,12 +31,15 @@ export class EventTicketBuyComponent implements OnInit {
     private router: Router,
     private eventService: EventsService,
     private citiesService: CitiesService,
-    private ticketsService: TicketsService
+    private ticketsService: TicketsService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     const cityId = this.route.snapshot.paramMap.get('id1')!;
     const eventId = this.route.snapshot.paramMap.get('id2')!;
+    this.cityid = cityId;
+    this.eventid = eventId;
     this.eventService.getEvent(cityId, eventId).subscribe(x => {
       this.event = x;
       // console.log(this.event)
@@ -43,11 +51,22 @@ export class EventTicketBuyComponent implements OnInit {
 
     this.ticketsService.getEventTickets(cityId, eventId).subscribe(x => {
       this.tickets = x;
-      console.log(JSON.stringify(x));
+      // console.log(JSON.stringify(x));
       this.vipTickets = this.tickets.filter(t => t.type == 'VIP').sort(t => +t.price);
       this.basicTickets = this.tickets.filter(t => t.type == 'BASIC').sort(t => +t.price);
     })
+  }
 
+  openDialog(event: EventsResponse) {
+    const dialogRef = this.dialog.open(TicketPurchaseComponent,
+      {
+        data: {event: event, cityid: this.cityid, eventid: this.eventid},
+        width: '80%',
+      });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      // console.log("fin");
+    })
   }
 
 }
