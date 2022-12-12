@@ -46,7 +46,7 @@ export class TicketEditComponent implements OnInit {
   }
 
   public saveTicket(): void {
-    console.log("TYPE " + this.type);
+    console.log("TYPE " + this.eventId);
     console.log("TYPE " + this.ticketFormGroup.get('type')!.value);
     const ticket = {
       price: this.ticketFormGroup.get('price')!.value,

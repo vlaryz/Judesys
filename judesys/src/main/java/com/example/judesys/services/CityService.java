@@ -67,6 +67,7 @@ public class CityService implements ICityService {
            return null;
 
         existingCity.setName(city.getName());
+        existingCity.setImage(city.getImage());
         repository.save(existingCity);
         return new CityResponse(existingCity);
     }

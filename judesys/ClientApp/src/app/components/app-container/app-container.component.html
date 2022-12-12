@@ -26,7 +26,8 @@
       <mat-icon>account_circle</mat-icon>{{userName}}
     </button>
     <button *ngIf="checkIfAdmin()" mat-icon-button matTooltip="Admin panel" style="margin-left: 5%" mat-button routerLink="/admin">
-      <mat-icon>account_circle</mat-icon>Admin panel
+      Admin panel
+<!--      <mat-icon>account_circle</mat-icon>Admin panel-->
     </button>
   </div>
   <span class="example-spacer"></span>
@@ -60,28 +61,36 @@
       <button mat-button routerLink="/">
         Explore Free Events
       </button>
-      <span class="navbar-spacer"></span>
-      <div *ngIf="!checkIfLoggedIn()">
-        <button mat-button routerLink="/login">
-          Login
-        </button>
-        <button mat-button routerLink="/register">
-          Register
-        </button>
-      </div>
-      <div *ngIf="checkIfLoggedIn()" style="margin: auto">
+      <button *ngIf="checkIfAdmin()" matTooltip="Admin panel" mat-button routerLink="/admin">
+        Admin panel
+        <!--      <mat-icon>account_circle</mat-icon>Admin panel-->
+      </button>
+      <button *ngIf="!checkIfLoggedIn()" mat-button routerLink="/login">
+        Login
+      </button>
+      <button *ngIf="!checkIfLoggedIn()" mat-button routerLink="/register">
+        Register
+      </button>
 
-        <button *ngIf="checkIfLoggedIn()" mat-icon-button matTooltip="Logout" (click)="logout()">
-          <mat-icon>logout</mat-icon>Logout
-        </button>
-      </div>
+      <button *ngIf="checkIfLoggedIn()" mat-button matTooltip="Logout" (click)="logout()" style="margin-right: 5%">
+        Logout
+      </button>
+    </div>
+    <div fxLayout="column">
+
     </div>
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>
     <router-outlet></router-outlet>
+    <mat-toolbar class="app-toolbar" style="height: 8%; background: #d93b75; position:absolute; top:92%;">
+      <span>Judesys.lt - modern application for tracking all events in Lithuania</span>
+<!--      <span>lol</span>-->
+    </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
 </div>
+
+
 
 
 <!--<mat-toolbar color="primary" class="mat-elevation-z8">-->

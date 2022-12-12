@@ -38,6 +38,7 @@ import {AuthorizeInterceptor} from "./authorize.interceptor";
 import {CdkColumnDef} from "@angular/cdk/table";
 import { EventEditComponent } from './components/event-edit/event-edit.component';
 import { TicketEditComponent } from './components/ticket-edit/ticket-edit.component';
+import { FooterContainerComponent } from './components/footer-container/footer-container.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { TicketEditComponent } from './components/ticket-edit/ticket-edit.compon
     CityEditComponent,
     EventEditComponent,
     TicketEditComponent,
+    FooterContainerComponent,
   ],
   imports: [
     BrowserModule,

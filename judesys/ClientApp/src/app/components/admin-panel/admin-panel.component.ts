@@ -136,7 +136,7 @@ export class AdminPanelComponent implements OnInit {
     // console.log(JSON.stringify(city));
     const dialogRef = this.dialog.open(TicketEditComponent,
       {
-        data: {act: "add", cityId: this.selectedCity.id, eventId: this.selectedTicket.id, ticket: ticket},
+        data: {act: "add", cityId: this.selectedCity.id, eventId: this.selectedEvent.id, ticket: ticket},
         width: '80%',
       });
 
