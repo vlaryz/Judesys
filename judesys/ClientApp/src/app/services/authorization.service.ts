@@ -41,10 +41,12 @@ export class AuthorizationService {
     return this.jwtTokenSubject.value;
   }
 
-  public checkIfAdmin(): boolean {
-    // console.log((jwt_decode(this.jwtToken) as JwtToken).roles);
-    // return true;
-    return (jwt_decode(this.jwtToken) as JwtToken).roles.includes("ROLE_ADMIN");
+  public checkIfAdmin(): string {
+    // if(this.jwtToken === undefined)
+    return this.jwtTokenSubject.value;
+    // console.log("token: " + (jwt_decode(this.jwtTokenSubject.value) as JwtToken).roles);
+    // return (jwt_decode(this.jwtToken) as JwtToken).roles.includes("ROLE_ADMIN");
+    // return (jwt_decode(this.jwtToken) as JwtToken).roles.includes("ROLE_ADMIN");
   }
 
   public getUserId(): string {

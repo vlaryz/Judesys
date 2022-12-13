@@ -8,6 +8,7 @@ import {CitiesService} from "../../services/cities.service";
 import {CityResponse} from "../../models/cityResponse";
 import {TicketResponse} from "../../models/ticketResponse";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {tick} from "@angular/core/testing";
 
 @Component({
   selector: 'app-ticket-purchase',
@@ -65,6 +66,16 @@ export class TicketPurchaseComponent implements OnInit {
   }
 
   public buyTicket(): void {
+    const ticket = {} as TicketResponse;
+    ticket.type = this.buyTicketForm.get('type')!.value!;
+    ticket.price = (this.buyTicketForm.get('type')!.value == 'VIP' ? this.vipTickets[0].price : this.basicTickets[0].price);
+
+    for(let i = 0; i < +this.buyTicketForm.get('count')!.value!; i++)
+      this.ticketsService.addTicket(this.city.id, this.event.id, ticket).subscribe(x => {
+        console.log(x);
+      });
+
+
     console.log(this.buyTicketForm.get("type")?.value);
     console.log(this.buyTicketForm.get("count")?.value);
   }

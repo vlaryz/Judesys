@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface ITicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> getTicketsByEventId(long eventId);
+    List<Ticket> getTicketsByBoughtBy(long boughtBy);
 }

@@ -12,12 +12,15 @@ import {CityEventsComponent} from "./components/city-events/city-events.componen
 import {EventListComponent} from "./components/event-list/event-list.component";
 import {EventTicketBuyComponent} from "./components/event-ticket-buy/event-ticket-buy.component";
 import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
+import {AccountDetailsComponent} from "./components/account-details/account-details.component";
+import {AuthorizationService} from "./services/authorization.service";
 
 const routes: Routes = [
   { path: '', component: AppContainerComponent, children: [
       { path: 'login', component: LoginComponent},
       { path: 'register', component: RegisterComponent},
       { path: 'admin', component: AdminPanelComponent, canActivate: [AuthorizedRouteGuard]},
+      { path: 'account', component: AccountDetailsComponent},
       { path: '', component: HomeScreenComponent},
       { path: 'cities',component: CitiesListComponent},
       { path: 'cities/:id',component: CityEventsComponent},

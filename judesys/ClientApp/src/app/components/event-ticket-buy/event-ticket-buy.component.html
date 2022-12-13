@@ -29,7 +29,9 @@
   </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button class="buttonBack" mat-raised-button routerLink="../../">Back</button>
-      <button *ngIf="tickets.length != 0" mat-raised-button (click)="openDialog(event)">Buy ticket</button>
+      <button *ngIf="tickets.length != 0" mat-raised-button [disabled]="!checkIfLoggedIn()" (click)="openDialog(event)">
+        <mat-icon *ngIf="!checkIfLoggedIn()" matTooltip="You must log in">cancel
+        </mat-icon>Buy ticket</button>
     </mat-dialog-actions>
   </mat-card>
 </div>

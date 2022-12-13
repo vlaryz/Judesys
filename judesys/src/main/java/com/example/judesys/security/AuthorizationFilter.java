@@ -38,6 +38,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
             if(authHeader != null && authHeader.startsWith("Bearer ")) {
                 try {
                     String token = authHeader.substring("Bearer ".length());
+                    System.out.println(token);
                     Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
                     JWTVerifier verifier = JWT.require(algorithm).build();
                     DecodedJWT decodedJWT = verifier.verify(token);
@@ -53,7 +54,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
                     filterChain.doFilter(request, response);
                 } catch (Exception e) {
-                    System.out.println("AUTHORIZATION ERROR");
+                    System.out.println("AUTHORIZATION ERROR " + e.getMessage());
                     response.setHeader("error", e.getMessage());
                     response.setStatus(FORBIDDEN.value());
                     Map<String, String> error = new HashMap<>();

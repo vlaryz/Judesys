@@ -1,9 +1,6 @@
 package com.example.judesys.controllers;
 
-import com.example.judesys.contracts.EventRequest;
-import com.example.judesys.contracts.EventResponse;
-import com.example.judesys.contracts.TicketRequest;
-import com.example.judesys.contracts.TicketResponse;
+import com.example.judesys.contracts.*;
 import com.example.judesys.services.EventService;
 import com.example.judesys.services.TicketService;
 import lombok.AllArgsConstructor;
@@ -42,6 +39,13 @@ public class TicketController {
     public ResponseEntity<List<TicketResponse>> getAllTickets(@PathVariable(value = "eventId") Long eventId,
                                                               @PathVariable(value = "cityId") Long cityId) {
         return new ResponseEntity<>(service.getAllTickets(cityId, eventId), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/byUser")
+    public ResponseEntity<List<TicketDetailsResponse>> getAllTicketsByUser(@PathVariable(value = "eventId") Long eventId,
+                                                                           @PathVariable(value = "cityId") Long cityId) {
+        return new ResponseEntity<>(service.getAllUserTickets(), HttpStatus.OK);
     }
 
     @CrossOrigin

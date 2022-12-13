@@ -3,6 +3,7 @@
 }
 .content {
   padding: 16px;
+  min-height: 92vh;
 }
 
 .content > mat-card {

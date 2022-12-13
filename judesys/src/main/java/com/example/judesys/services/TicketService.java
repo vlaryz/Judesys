@@ -1,6 +1,7 @@
 package com.example.judesys.services;
 
 import com.example.judesys.contracts.EventResponse;
+import com.example.judesys.contracts.TicketDetailsResponse;
 import com.example.judesys.contracts.TicketRequest;
 import com.example.judesys.contracts.TicketResponse;
 import com.example.judesys.exceptions.ResourceNotFoundException;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,11 +30,14 @@ public class TicketService implements ITicketService {
     @Override
     public TicketResponse saveTicket(long cityId, long eventId, TicketRequest ticketRequest) {
         Ticket ticket = ticketRequest.getTicket();
-
+        System.out.println(ticketRequest.toString());
+        System.out.println(ticket.toString());
         var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
         var userId =  userService.getUser(userName).getId();
         ticket.setCreatedBy(userId);
-
+        System.out.println("userID " + userId);
+        ticket.setBoughtBy(userId);
+        System.out.println(ticket.toString());
         var event = eventRepository.findByCityIdAndId(cityId, eventId);
         System.out.println("eventas: " + event.get().getName());
         if(!event.isPresent())
@@ -45,6 +50,17 @@ public class TicketService implements ITicketService {
     @Override
     public List<TicketResponse> getAllTickets(long cityId, long eventId) {
         return ticketRepository.getTicketsByEventId(eventId).stream().map(TicketResponse::new).toList();
+    }
+
+    public List<TicketDetailsResponse> getAllUserTickets() {
+        var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
+        var userId =  userService.getUser(userName).getId();
+        var tickets = ticketRepository.getTicketsByBoughtBy(userId).stream().toList();
+        var responseTickets = new ArrayList<TicketDetailsResponse>();
+        for (Ticket ticket: tickets) {
+            responseTickets.add(new TicketDetailsResponse(ticket, ticket.getEvent().getCity(), ticket.getEvent()));
+        }
+        return responseTickets;
     }
 
     @Override

@@ -9,6 +9,7 @@ import {TicketResponse} from "../../models/ticketResponse";
 import {MatDialog} from "@angular/material/dialog";
 import {EventDetailsComponent} from "../event-details/event-details.component";
 import {TicketPurchaseComponent} from "../ticket-purchase/ticket-purchase.component";
+import {AuthorizationService} from "../../services/authorization.service";
 
 @Component({
   selector: 'app-event-ticket-buy',
@@ -32,7 +33,8 @@ export class EventTicketBuyComponent implements OnInit {
     private eventService: EventsService,
     private citiesService: CitiesService,
     private ticketsService: TicketsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthorizationService
   ) { }
 
   ngOnInit(): void {
@@ -69,4 +71,7 @@ export class EventTicketBuyComponent implements OnInit {
     })
   }
 
+  public checkIfLoggedIn(): boolean {
+    return this.authService.isAuthorized;
+  }
 }

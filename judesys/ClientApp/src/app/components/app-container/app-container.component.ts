@@ -30,14 +30,9 @@ export class AppContainerComponent {
 
     try {
       this.userName = (jwt_decode(authService.jwtToken) as JwtToken).sub;
-
     }
     catch (e) {
-      console.log(e);
     }
-    // console.log(authService.checkIfAdmin());
-    // console.log(dec.sub);
-    // this.isLoggedIn = authService.isAuthorized;
   }
 
   public checkIfLoggedIn(): boolean {
@@ -45,7 +40,12 @@ export class AppContainerComponent {
   }
 
   public checkIfAdmin(): boolean {
-    return true;
+    try{
+     return (jwt_decode(this.authService.checkIfAdmin()) as JwtToken).roles.includes("ROLE_ADMIN");
+    }
+    catch (e) {
+      return false;
+    }
   }
 
   public logout(): void {

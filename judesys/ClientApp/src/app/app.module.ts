@@ -39,6 +39,8 @@ import {CdkColumnDef} from "@angular/cdk/table";
 import { EventEditComponent } from './components/event-edit/event-edit.component';
 import { TicketEditComponent } from './components/ticket-edit/ticket-edit.component';
 import { FooterContainerComponent } from './components/footer-container/footer-container.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { FooterContainerComponent } from './components/footer-container/footer-c
     EventEditComponent,
     TicketEditComponent,
     FooterContainerComponent,
+    AccountDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +85,7 @@ import { FooterContainerComponent } from './components/footer-container/footer-c
     MatSelectModule,
     MatTabsModule,
     FormsModule,
+    MatTableModule,
   ],
   providers: [
     [CdkColumnDef,{

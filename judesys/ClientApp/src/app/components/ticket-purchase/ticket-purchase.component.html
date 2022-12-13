@@ -18,7 +18,7 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Count</mat-label>
-        <input formControlName="count" matInput type="number" min="1">
+        <input formControlName="count" matInput type="number" min="1" max="5">
       </mat-form-field>
     </div>
     <div *ngIf="total != 0">
@@ -27,7 +27,7 @@
 <!--      <p *ngIf="selectedType === '1'"><strong>{{(+basicTickets[0].price / 100)}}€</strong></p>-->
     </div>
     <div>
-      <button type="submit" mat-raised-button color="primary">Purchase ticket</button>
+      <button type="submit" mat-raised-button color="primary" >Purchase ticket</button>
     </div>
   </form>
 </div>

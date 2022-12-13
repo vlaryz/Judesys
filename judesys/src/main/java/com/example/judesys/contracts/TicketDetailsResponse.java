@@ -1,5 +1,6 @@
 package com.example.judesys.contracts;
 
+import com.example.judesys.models.City;
 import com.example.judesys.models.Event;
 import com.example.judesys.models.Ticket;
 import com.example.judesys.models.enums.TicketType;
@@ -12,18 +13,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TicketResponse {
+public class TicketDetailsResponse {
     private long id;
     private long price;
     private TicketType type;
+    private String city;
+    private String event;
 
     private Long boughtBy;
 
-    public TicketResponse(Ticket ticket) {
+    public TicketDetailsResponse(Ticket ticket, City city, Event event) {
         this.id = ticket.getId();
         this.price = ticket.getPrice();
         this.type = ticket.getType();
         this.boughtBy = ticket.getBoughtBy();
+        this.city = city.getName();
+        this.event = event.getName();
     }
     public static TicketResponse fromTicket (Ticket ticket){
         return new TicketResponse(ticket.getId(), ticket.getPrice(), ticket.getType(), ticket.getBoughtBy());

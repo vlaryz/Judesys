@@ -22,7 +22,7 @@
       <button mat-button routerLink="/">
         Explore Free Events
       </button>
-    <button *ngIf="checkIfLoggedIn()" mat-icon-button matTooltip="Account">
+    <button *ngIf="checkIfLoggedIn()" mat-icon-button matTooltip="Account" routerLink="/account">
       <mat-icon>account_circle</mat-icon>{{userName}}
     </button>
     <button *ngIf="checkIfAdmin()" mat-icon-button matTooltip="Admin panel" style="margin-left: 5%" mat-button routerLink="/admin">
@@ -82,10 +82,22 @@
   </mat-sidenav>
   <mat-sidenav-content fxFlexFill>
     <router-outlet></router-outlet>
-    <mat-toolbar class="app-toolbar" style="height: 8%; background: #d93b75; position:absolute; top:92%;">
-      <span>Judesys.lt - modern application for tracking all events in Lithuania</span>
-<!--      <span>lol</span>-->
-    </mat-toolbar>
+    <footer class="footer">
+      <mat-toolbar class="md-hue-2 md-scroll-shrink">
+        <div layout="row" layout-align="center center" flex>
+          Powered by Judesys Technologies
+        </div>
+      </mat-toolbar>
+    </footer>
+<!--    <footer style="height: 8%; background: pink">-->
+<!--      <span>Judesys.lt - modern application for tracking all events in Lithuania</span>-->
+<!--    </footer>-->
+<!--    <div class="footer">-->
+<!--    <mat-toolbar>-->
+<!--      <span>Judesys.lt - modern application for tracking all events in Lithuania</span>-->
+<!--&lt;!&ndash;      <span>lol</span>&ndash;&gt;-->
+<!--    </mat-toolbar>-->
+<!--    </div>-->
   </mat-sidenav-content>
 </mat-sidenav-container>
 </div>

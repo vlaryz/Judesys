@@ -5,6 +5,7 @@ import {CityResponse} from "../models/cityResponse";
 import {EventsResponse} from "../models/eventsResponse";
 import {TicketResponse} from "../models/ticketResponse";
 import {EventsResponseFormatted} from "../models/eventsResponseFormatted";
+import {HttpHeaders, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,9 @@ export class TicketsService {
   }
 
   public getEventTickets(cityId: string, eventId: string): Observable<TicketResponse[]> {
-    return this.httpService.get('/api/cities/' + cityId + '/events/' + eventId , '/tickets/');
+    return this.httpService.get('/api/cities/' + cityId + '/events/' + eventId, '/tickets/');
   }
+
   public deleteTicket(id: string, eventid: string, ticketid: string): Observable<TicketResponse> {
     return this.httpService.delete('/api/cities/' + id, '/events/' + eventid + '/tickets/' + ticketid);
   }
@@ -28,8 +30,11 @@ export class TicketsService {
     return this.httpService.put('/api/cities/' + id, '/events/' + eventid + '/tickets/' + ticketid, ticket);
   }
 
-  public addTicket(id: string, eventid: string,ticket: TicketResponse): Observable<TicketResponse> {
+  public addTicket(id: string, eventid: string, ticket: TicketResponse): Observable<TicketResponse> {
     return this.httpService.post('/api/cities/' + id, '/events/' + eventid + '/tickets/', ticket);
   }
 
+  public getUserTickets(cityId: string, eventId: string): Observable<TicketResponse[]> {
+    return this.httpService.get('/api/cities/' + cityId + '/events/' + eventId, '/tickets/byUser');
+  }
 }

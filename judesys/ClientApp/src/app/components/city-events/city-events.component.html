@@ -1,7 +1,7 @@
 <h1 class="mat-h1" style="text-align: center;">{{city}}</h1>
 <h1 *ngIf="events.length == 0" class="mat-h1" style="text-align: center;">Currently There Are No Evenets in {{city}} :(</h1>
 
-<div class="content">
+<div class="content"  style="margin-bottom: 5%">
   <div fxLayout="column wrap" fxLayoutGap="16px grid">
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let event of events">
       <mat-card class="mat-elevation-z4">
