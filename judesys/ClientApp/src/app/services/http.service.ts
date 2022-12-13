@@ -7,8 +7,8 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class HttpService {
 
-  // private baseUrl = "https://web-app-judesys.azurewebsites.net";
-  private baseUrl = "http://localhost:8080";
+  private baseUrl = "https://web-app-judesys.azurewebsites.net";
+  // private baseUrl = "http://localhost:8080";
 
   constructor(
     private readonly httpClient: HttpClient
