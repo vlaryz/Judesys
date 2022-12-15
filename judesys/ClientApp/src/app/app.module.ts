@@ -41,6 +41,8 @@ import { TicketEditComponent } from './components/ticket-edit/ticket-edit.compon
 import { FooterContainerComponent } from './components/footer-container/footer-container.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import {MatTableModule} from "@angular/material/table";
+import { DocsComponent } from './components/docs/docs.component';
+import { ViewDownloadTicketComponent } from './components/view-download-ticket/view-download-ticket.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import {MatTableModule} from "@angular/material/table";
     TicketEditComponent,
     FooterContainerComponent,
     AccountDetailsComponent,
+    DocsComponent,
+    ViewDownloadTicketComponent,
   ],
   imports: [
     BrowserModule,

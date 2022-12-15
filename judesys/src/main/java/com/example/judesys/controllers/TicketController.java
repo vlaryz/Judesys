@@ -3,6 +3,10 @@ package com.example.judesys.controllers;
 import com.example.judesys.contracts.*;
 import com.example.judesys.services.EventService;
 import com.example.judesys.services.TicketService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,7 @@ import java.util.List;
 public class TicketController {
     public final TicketService service;
 
+    @ApiOperation(value = "Get all tickets by city and event id's", notes = "Returns all tickets by city and event id's")
     @CrossOrigin
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<TicketResponse> addTicket(@PathVariable(value = "eventId") Long eventId,

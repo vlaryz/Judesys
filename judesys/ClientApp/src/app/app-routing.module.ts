@@ -14,6 +14,7 @@ import {EventTicketBuyComponent} from "./components/event-ticket-buy/event-ticke
 import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
 import {AccountDetailsComponent} from "./components/account-details/account-details.component";
 import {AuthorizationService} from "./services/authorization.service";
+import {DocsComponent} from "./components/docs/docs.component";
 
 const routes: Routes = [
   { path: '', component: AppContainerComponent, children: [
@@ -24,7 +25,8 @@ const routes: Routes = [
       { path: '', component: HomeScreenComponent},
       { path: 'cities',component: CitiesListComponent},
       { path: 'cities/:id',component: CityEventsComponent},
-      { path: 'cities/:id1/events/:id2', component: EventTicketBuyComponent}
+      { path: 'cities/:id1/events/:id2', component: EventTicketBuyComponent},
+      { path: 'docs', component: DocsComponent}
 
     ]
   },

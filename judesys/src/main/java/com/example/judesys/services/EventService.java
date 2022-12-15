@@ -27,6 +27,7 @@ public class EventService implements IEventService {
 
     @Override
     public EventResponse saveEvent(EventRequest eventRequest, long cityId) {
+        System.out.println(eventRequest);
         Event event = eventRequest.getEvent();
         var userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().trim();
         var userId =  userService.getUser(userName).getId();

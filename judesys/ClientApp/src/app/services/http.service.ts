@@ -16,6 +16,8 @@ export class HttpService {
 
     public get<TResponse = any>(controller: string, endpoint: string): Observable<TResponse> {
       const request = this.httpClient.get<TResponse>(this.baseUrl + controller + endpoint);
+      // console.log("events: " + JSON.stringify(request));
+
       return request;
     }
 

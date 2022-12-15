@@ -12,16 +12,18 @@ export class EventDetailsComponent implements OnInit {
 
   public eventDescription: string = "";
   private price: string = "";
+  public cityName: string = "";
   public event: EventsResponse = {} as EventsResponse;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: EventsResponse,
+    @Inject(MAT_DIALOG_DATA) public data: {event: EventsResponse, city: string},
   ) { }
 
   ngOnInit(): void {
-    this.eventDescription = this.data.name;
-    this.event = this.data;
-    this.price = String(this.data.free);
+    this.eventDescription = this.event.longDescr;
+    this.event = this.data.event;
+    this.price = String(this.data.event.free);
+    this.cityName = this.data.city;
   }
 
 }

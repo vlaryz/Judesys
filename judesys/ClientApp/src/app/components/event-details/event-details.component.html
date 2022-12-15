@@ -1,20 +1,14 @@
 <p mat-dialog-title>{{event.name}}</p>
 <mat-dialog-content class="mat-typography">
   <h3>City</h3>
-  <p>Learn one way to build applications with Angular and reuse your code and abilities to build
-    apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
+  <p><strong>{{cityName}}</strong></p>
 
   <h3>Description</h3>
   <p>{{event.longDescr}}</p>
 
-  <h3>Tickets Left</h3>
-  <p>Build features quickly with simple, declarative templates. Extend the template language with
-    your own components and use a wide array of existing components. Get immediate Angular-specific
-    help and feedback with nearly every IDE and editor. All this comes together so you can focus
-    on building amazing apps rather than trying to make the code work.</p>
-
-  <h3>Tickets Prices</h3>
-  <p *ngIf="event.free">Free</p>
+  <div *ngIf="event.free"  style="text-align: center; background: green; width: 10%; min-width: 50px;  border-radius: 10px;">
+    <h3 class="mat-h3" style="color: white;">Free!</h3>
+  </div>
 
 
 </mat-dialog-content>

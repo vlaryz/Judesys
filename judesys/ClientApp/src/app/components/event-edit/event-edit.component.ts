@@ -48,7 +48,7 @@ export class EventEditComponent implements OnInit {
   public saveEvent(): void {
     const event = {
       name: this.eventFormGroup.get('name')!.value,
-      isFree: this.isFree,
+      isFree: this.eventFormGroup.get('isFree')!.value,
       shortDescription: this.eventFormGroup.get('shortDescription')!.value,
       longDescription: this.eventFormGroup.get('longDescription')!.value!
     }

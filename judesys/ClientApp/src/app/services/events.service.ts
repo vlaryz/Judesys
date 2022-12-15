@@ -25,15 +25,15 @@ export class EventsService {
     return this.httpService.get('/api/cities/' + cityId, '/events/' + eventId);
   }
 
-  public deleteEvent(id: string, eventid: string): Observable<CityResponse> {
+  public deleteEvent(id: string, eventid: string): Observable<EventsResponse> {
     return this.httpService.delete('/api/cities/' + id, '/events/' + eventid);
   }
 
-  public editEvent(id: string, eventid: string, event: EventsResponseFormatted): Observable<CityResponse> {
+  public editEvent(id: string, eventid: string, event: EventsResponseFormatted): Observable<EventsResponse> {
     return this.httpService.put('/api/cities/' + id, '/events/' + eventid, event);
   }
 
-  public addEvent(cityId: string, event: EventsResponseFormatted): Observable<CityResponse> {
+  public addEvent(cityId: string, event: EventsResponseFormatted): Observable<EventsResponse> {
     return this.httpService.post('/api/cities/' + cityId, '/events/', event);
   }
 }

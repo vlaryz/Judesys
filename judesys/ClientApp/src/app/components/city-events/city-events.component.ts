@@ -32,6 +32,7 @@ export class CityEventsComponent implements OnInit {
     })
     this.eventsService.getAllCityEvents(id).subscribe(x => {
       this.events = x;
+      console.log("events: " + JSON.stringify(x));
       // this.events.forEach(x => {
       //     console.log(x.name + " " + x.isFree)
       // })
@@ -41,7 +42,7 @@ export class CityEventsComponent implements OnInit {
   openDialog(event: EventsResponse) {
     const dialogRef = this.dialog.open(EventDetailsComponent,
       {
-        data: event,
+        data: {event: event, city: this.city},
         width: '80%',
       });
 
