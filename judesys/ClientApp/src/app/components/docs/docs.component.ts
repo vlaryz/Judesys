@@ -17,7 +17,7 @@ export class DocsComponent implements OnInit {
   }
 
   initDocs() {
-    Redoc.init('http://localhost:8080/v2/api-docs?group=public-api', {
+    Redoc.init('https://web-app-judesys.azurewebsites.net/v2/api-docs?group=public-api', {
       hideDownloadButton: true,
     }, document.getElementById('redoc'))
   }
