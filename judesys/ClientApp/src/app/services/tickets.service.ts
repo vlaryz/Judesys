@@ -18,6 +18,10 @@ export class TicketsService {
   ) {
   }
 
+  public getTicket(cityId: string, eventId: string, ticketId: string): Observable<TicketResponse> {
+    return this.httpService.get('/api/cities/' + cityId + '/events/' + eventId, '/tickets/' + ticketId);
+  }
+
   public getEventTickets(cityId: string, eventId: string): Observable<TicketResponse[]> {
     return this.httpService.get('/api/cities/' + cityId + '/events/' + eventId, '/tickets/');
   }

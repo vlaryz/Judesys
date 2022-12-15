@@ -27,6 +27,14 @@
         <td mat-cell *matCellDef="let element"> {{+(element.price / 100)}}€</td>
       </ng-container>
 
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button [routerLink]="['/cities', element.cityId, 'events', element.eventId, 'tickets', element.id]">
+            View
+          </button> </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

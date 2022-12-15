@@ -17,6 +17,9 @@ public class TicketDetailsResponse {
     private long id;
     private long price;
     private TicketType type;
+    private long cityId;
+    private long eventId;
+
     private String city;
     private String event;
 
@@ -27,6 +30,8 @@ public class TicketDetailsResponse {
         this.price = ticket.getPrice();
         this.type = ticket.getType();
         this.boughtBy = ticket.getBoughtBy();
+        this.cityId = city.getId();
+        this.eventId = event.getId();
         this.city = city.getName();
         this.event = event.getName();
     }

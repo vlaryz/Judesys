@@ -17,7 +17,7 @@
         <mat-card-actions>
           <button mat-raised-button (click)="openDialog(event)">Details</button>
 <!--          <div *ngIf="!event.free">-->
-            <button *ngIf="!event.free" mat-raised-button [routerLink]="['/cities', 3, 'events', event.id]">Buy ticket</button>
+            <button *ngIf="!event.free" mat-raised-button [routerLink]="['/cities', cityId, 'events', event.id]">Buy ticket</button>
 <!--          </div>-->
         </mat-card-actions>
       </mat-card>

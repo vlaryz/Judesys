@@ -16,6 +16,7 @@ export class CityEventsComponent implements OnInit {
 
   public events: EventsResponse[] = [];
   public city = "";
+  public cityId: string = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -27,12 +28,14 @@ export class CityEventsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
+    this.cityId = id;
+    // console.log("IDDD: " + id);
     this.cityService.getCity(id).subscribe(x => {
       this.city = x.name;
     })
     this.eventsService.getAllCityEvents(id).subscribe(x => {
       this.events = x;
-      console.log("events: " + JSON.stringify(x));
+      // console.log("events: " + JSON.stringify(x));
       // this.events.forEach(x => {
       //     console.log(x.name + " " + x.isFree)
       // })

@@ -15,6 +15,7 @@ import {AdminPanelComponent} from "./components/admin-panel/admin-panel.componen
 import {AccountDetailsComponent} from "./components/account-details/account-details.component";
 import {AuthorizationService} from "./services/authorization.service";
 import {DocsComponent} from "./components/docs/docs.component";
+import {ViewDownloadTicketComponent} from "./components/view-download-ticket/view-download-ticket.component";
 
 const routes: Routes = [
   { path: '', component: AppContainerComponent, children: [
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'cities',component: CitiesListComponent},
       { path: 'cities/:id',component: CityEventsComponent},
       { path: 'cities/:id1/events/:id2', component: EventTicketBuyComponent},
+      { path: 'cities/:id1/events/:id2/tickets/:id3', component: ViewDownloadTicketComponent},
       { path: 'docs', component: DocsComponent}
 
     ]

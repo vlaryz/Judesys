@@ -23,7 +23,6 @@ import java.util.List;
 public class TicketController {
     public final TicketService service;
 
-    @ApiOperation(value = "Get all tickets by city and event id's", notes = "Returns all tickets by city and event id's")
     @CrossOrigin
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<TicketResponse> addTicket(@PathVariable(value = "eventId") Long eventId,
