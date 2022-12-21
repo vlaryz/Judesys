@@ -29,6 +29,30 @@ Aplikacijai buvo sukurtas frontend'as, kuris yra realizuotas su Angular framewor
 Frontendas buvo panaudotas AngularMaterials biblioteka. Yra Repsonsive layout, animacijos, paveiksliukai, modaliniai langai ir viskas ko buvo reikalaujama lab. darbo apraše.
 Taip pat yra ir dokumentacija
 
+# API
+Norint išbandyti generuojamą dokumentaciją, įdėkite projekto resources direktorijoje esantį swagger.json į https://redocly.github.io/redoc/ 
+## Tickets
+![image](https://user-images.githubusercontent.com/61593050/208993284-02162d08-e667-4576-be65-4ba669d96e9b.png)
+![image](https://user-images.githubusercontent.com/61593050/208993488-9cb79f2e-c390-4e83-84b7-fea71b9414d5.png)
+![image](https://user-images.githubusercontent.com/61593050/208993555-0ddb61f4-97f5-4aea-9152-df7af75ad1f6.png)
+![image](https://user-images.githubusercontent.com/61593050/208993597-256c2bd2-20e7-45c9-81d4-c510bdb6c453.png)
+![image](https://user-images.githubusercontent.com/61593050/208993650-927d6598-6a55-497f-8445-5cdec9434ed9.png)
+
+## Events
+![image](https://user-images.githubusercontent.com/61593050/208993724-97869f61-7a39-4a9e-9ba2-1d3683d9b2cf.png)
+![image](https://user-images.githubusercontent.com/61593050/208993758-7cfb0a80-be0e-4b84-9c5f-2ca1ec204592.png)
+![image](https://user-images.githubusercontent.com/61593050/208993779-7da1608a-ca17-47b5-879a-749773332f95.png)
+![image](https://user-images.githubusercontent.com/61593050/208993822-567bb877-6df0-4635-9143-52c9861b5917.png)
+![image](https://user-images.githubusercontent.com/61593050/208993847-b3ca1be3-79a9-47c1-b5aa-f3dadf093c39.png)
+
+## Cities
+![image](https://user-images.githubusercontent.com/61593050/208993889-87f2b116-0d2d-495a-91b6-e9b5e2db4708.png)
+![image](https://user-images.githubusercontent.com/61593050/208993921-0ddefd60-e3ba-48ed-b68d-39f980af36e2.png)
+![image](https://user-images.githubusercontent.com/61593050/208993941-738996e9-ce28-4167-8b10-a32cb0ad271a.png)
+![image](https://user-images.githubusercontent.com/61593050/208993969-e155443e-851c-4889-9ab6-4bf9f98be8e1.png)
+![image](https://user-images.githubusercontent.com/61593050/208994000-1fb07eba-9913-4ad4-9bc8-8b621df43646.png)
+
+
 # Wireframes ir rezultatas
 ## Home puslapis
 ![homePage](https://user-images.githubusercontent.com/61593050/208077296-1b94d6ac-c1f7-437f-9ee7-ca05bf46aab4.png)
